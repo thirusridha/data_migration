@@ -1,0 +1,1 @@
+./DataMigration.sh SSS_SECURITIES_PRICE_FILE_UPLOAD

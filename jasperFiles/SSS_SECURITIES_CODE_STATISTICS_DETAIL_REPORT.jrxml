@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SSS_SECURITIES_CODE_STATISTIC_DETAIL_REPORT" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b39ffd03-50ea-4815-8d40-5572dcf55796">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sss"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Dataset1" uuid="2ec1daa0-c296-4e1a-986c-8112de0aca8f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SSS_Data_Migration"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="where_clause2" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{Idate}==null  || $P{Idate}.trim().isEmpty() ? "1=1": " Date(created_date) ='"+ $P{Idate}+"'"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Idate" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select count(securities_code) FROM securities_code_statistics where  $P!{where_clause2}]]>
+		</queryString>
+		<field name="count(securities_code)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(securities_code)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(securities_code)"/>
+		</field>
+	</subDataset>
+	<parameter name="reportID" class="java.lang.String"/>
+	<parameter name="iDate" class="java.lang.String"/>
+	<parameter name="where_clause" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{iDate}==null  || $P{iDate}.trim().isEmpty() ? "1=1": " Date(z.migrated_date) ='"+ $P{iDate}+"'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+IFNULL(x.securities_code,'')AS x_securities_code,
+IFNULL(y.securities_code ,'')AS y_securities_code,
+IFNULL(z.securities_code,'') AS z_securities_code,
+IFNULL(x.total_redeemed_amount,'')AS x_total_redeemed_amount,
+IFNULL(y.total_redeemed_amount ,'')AS y_total_redeemed_amount,
+IFNULL(z.total_redeemed_amount,'') AS z_total_redeemed_amount,
+IFNULL(x.total_nominal_amount_issued_for_erf,'')AS x_total_nominal_amount_issued_for_erf,
+IFNULL(y.total_nominal_amount_issued_for_erf ,'')AS y_total_nominal_amount_issued_for_erf,
+IFNULL(z.total_nominal_amount_issued_for_erf,'') AS z_total_nominal_amount_issued_for_erf,
+IFNULL(x.total_redeemed_amount_for_erf,'')AS x_total_redeemed_amount_for_erf,
+IFNULL(y.total_redeemed_amount_for_erf ,'')AS y_total_redeemed_amount_for_erf,
+IFNULL(z.total_redeemed_amount_for_erf,'') AS z_total_redeemed_amount_for_erf,
+IFNULL(x.outstanding_nominal_amount,'')AS x_outstanding_nominal_amount,
+IFNULL(y.outstanding_nominal_amount ,'')AS y_outstanding_nominal_amount,
+IFNULL(z.outstanding_nominal_amount,'') AS z_outstanding_nominal_amount,
+IFNULL(x.next_coupon_date,'')AS x_next_coupon_date,
+IFNULL(y.next_coupon_date ,'')AS y_next_coupon_date,
+IFNULL(z.next_coupon_date,'') AS z_next_coupon_date,
+IFNULL(x.last_coupon_date,'')AS x_last_coupon_date,
+IFNULL(y.last_coupon_date ,'')AS y_last_coupon_date,
+IFNULL(z.last_coupon_date,'') AS z_last_coupon_date,
+IFNULL(x.next_index_end_date,'')AS x_next_index_end_date,
+IFNULL(y.next_index_end_date ,'')AS y_next_index_end_date,
+IFNULL(z.next_index_end_date,'') AS z_next_index_end_date,
+IFNULL(x.amount_allotted_to_central_bank,'')AS x_amount_allotted_to_central_bank,
+IFNULL(y.amount_allotted_to_central_bank ,'')AS y_amount_allotted_to_central_bank,
+IFNULL(z.amount_allotted_to_central_bank,'') AS z_amount_allotted_to_central_bank,
+IFNULL(x.amount_allotted_to_others,'')AS x_amount_allotted_to_others,
+IFNULL(y.amount_allotted_to_others ,'')AS y_amount_allotted_to_others,
+IFNULL(z.amount_allotted_to_others,'') AS z_amount_allotted_to_others,
+case when z.remarks is null then IFNULL(y.remarks ,'') else IFNULL(z.remarks ,'') end  AS y_remark
+FROM securities_code_statistics_source z  left join
+securities_code_statistics_temp y on z.id=y.id left join 
+securities_code_statistics x on x.securities_code=y.securities_code AND y.remarks is null where $P!{where_clause}
+ORDER BY z.seq asc]]>
+	</queryString>
+	<field name="x_securities_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_securities_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_securities_code"/>
+	</field>
+	<field name="y_securities_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_securities_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_securities_code"/>
+	</field>
+	<field name="z_securities_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_securities_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_securities_code"/>
+	</field>
+	<field name="x_total_redeemed_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_total_redeemed_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_total_redeemed_amount"/>
+	</field>
+	<field name="y_total_redeemed_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_total_redeemed_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_total_redeemed_amount"/>
+	</field>
+	<field name="z_total_redeemed_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_total_redeemed_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_total_redeemed_amount"/>
+	</field>
+	<field name="x_total_nominal_amount_issued_for_erf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_total_nominal_amount_issued_for_erf"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_total_nominal_amount_issued_for_erf"/>
+	</field>
+	<field name="y_total_nominal_amount_issued_for_erf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_total_nominal_amount_issued_for_erf"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_total_nominal_amount_issued_for_erf"/>
+	</field>
+	<field name="z_total_nominal_amount_issued_for_erf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_total_nominal_amount_issued_for_erf"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_total_nominal_amount_issued_for_erf"/>
+	</field>
+	<field name="x_total_redeemed_amount_for_erf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_total_redeemed_amount_for_erf"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_total_redeemed_amount_for_erf"/>
+	</field>
+	<field name="y_total_redeemed_amount_for_erf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_total_redeemed_amount_for_erf"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_total_redeemed_amount_for_erf"/>
+	</field>
+	<field name="z_total_redeemed_amount_for_erf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_total_redeemed_amount_for_erf"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_total_redeemed_amount_for_erf"/>
+	</field>
+	<field name="x_outstanding_nominal_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_outstanding_nominal_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_outstanding_nominal_amount"/>
+	</field>
+	<field name="y_outstanding_nominal_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_outstanding_nominal_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_outstanding_nominal_amount"/>
+	</field>
+	<field name="z_outstanding_nominal_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_outstanding_nominal_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_outstanding_nominal_amount"/>
+	</field>
+	<field name="x_next_coupon_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_next_coupon_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_next_coupon_date"/>
+	</field>
+	<field name="y_next_coupon_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_next_coupon_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_next_coupon_date"/>
+	</field>
+	<field name="z_next_coupon_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_next_coupon_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_next_coupon_date"/>
+	</field>
+	<field name="x_last_coupon_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_last_coupon_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_last_coupon_date"/>
+	</field>
+	<field name="y_last_coupon_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_last_coupon_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_last_coupon_date"/>
+	</field>
+	<field name="z_last_coupon_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_last_coupon_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_last_coupon_date"/>
+	</field>
+	<field name="x_next_index_end_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_next_index_end_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_next_index_end_date"/>
+	</field>
+	<field name="y_next_index_end_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_next_index_end_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_next_index_end_date"/>
+	</field>
+	<field name="z_next_index_end_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_next_index_end_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_next_index_end_date"/>
+	</field>
+	<field name="x_amount_allotted_to_central_bank" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_amount_allotted_to_central_bank"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_amount_allotted_to_central_bank"/>
+	</field>
+	<field name="y_amount_allotted_to_central_bank" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_amount_allotted_to_central_bank"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_amount_allotted_to_central_bank"/>
+	</field>
+	<field name="z_amount_allotted_to_central_bank" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_amount_allotted_to_central_bank"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_amount_allotted_to_central_bank"/>
+	</field>
+	<field name="x_amount_allotted_to_others" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_amount_allotted_to_others"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_amount_allotted_to_others"/>
+	</field>
+	<field name="y_amount_allotted_to_others" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_amount_allotted_to_others"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_amount_allotted_to_others"/>
+	</field>
+	<field name="z_amount_allotted_to_others" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_amount_allotted_to_others"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_amount_allotted_to_others"/>
+	</field>
+	<field name="y_remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_remark"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_remark"/>
+	</field>
+	<variable name="msc_count" class="java.util.concurrent.atomic.AtomicInteger" calculation="System">
+		<initialValueExpression><![CDATA[new java.util.concurrent.atomic.AtomicInteger(1)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="180" height="18" uuid="c02a088a-e3be-4ef8-8a3b-d0f84adec554"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<"+$P{reportID}+">"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="0" width="200" height="20" uuid="5335a8ff-9944-4b4c-b247-2339d98c1717"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="470" y="0" width="106" height="20" uuid="80c096d9-5526-44a4-b24a-77b0728045ba"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="237" y="0" width="80" height="20" uuid="f4bcd566-9dec-4719-9c33-10b5cdeabff2"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCRIPS SSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="20" width="290" height="20" uuid="e3a9cbb6-0734-48be-9711-2d8159dd20ea"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA MIGRATION SECURITIES CODE STATISTICS DETAIL REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="390" y="20" width="100" height="20" uuid="80c06caa-1f98-4818-85fe-52bc685b3d55"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="70" height="20" uuid="654fff92-84cc-4f1f-8a4d-a1cd06d614e3"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="0" width="51" height="20" uuid="76c9418e-84d3-4b04-afd4-933d4419c19b"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="70" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="544" height="60" uuid="5f3522b1-6bc4-416b-9a65-25f0fae5dc28"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Dataset1" uuid="0f6797fc-9242-44db-906c-bed612ac5bd2">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="60" width="544">
+						<staticText>
+							<reportElement x="0" y="0" width="81" height="18" uuid="fef32799-c349-40a3-beb8-80fa9bb9f3e4"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[DETAILS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="180" y="0" width="110" height="18" uuid="570fb0f1-474c-489b-8364-007306c24d7d"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="300" y="0" width="100" height="18" uuid="1cc5f59a-c3ca-4365-853f-9b370c566383"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Original Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="440" y="0" width="60" height="18" uuid="09f07046-af83-4184-8d3a-a4e5cb6d7e37"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Source]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="18" width="150" height="19" uuid="7121d354-7012-484e-ae5d-c17183820c90"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Securities Code Statistics Table - SCRIPS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="37" width="160" height="23" uuid="fca38a7c-03ad-419d-ac2f-08ce070d37a8"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Total Securities Code Statistics migrated to SCRIPS  :]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="180" y="37" width="91" height="23" uuid="edc111c9-137d-4b91-8b82-db2ba28d834d"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{count(securities_code)}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="495" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="30" width="100" height="30" uuid="5383a743-6262-4786-b6a3-89ec5049b9f5"/>
+				<textFieldExpression><![CDATA[$F{x_securities_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="120" height="30" uuid="30bdc805-20e4-4154-9e56-89d1b510fa4e"/>
+				<text><![CDATA[Total Redeemed Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="120" height="30" uuid="1d09bb39-5868-4bef-a8e3-91d70a65841c"/>
+				<text><![CDATA[Securities Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="120" height="30" uuid="65057158-271e-46d5-a674-cdf2f45dc506"/>
+				<text><![CDATA[Total Redeemed Amount For Erf]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="120" height="30" uuid="2952e3f1-0633-4510-9f7d-9ed5b98f5c04"/>
+				<text><![CDATA[Total nominal Amount Issued For Erf]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="150" width="120" height="30" uuid="6c67768b-ecef-4d0b-b68a-624de0f676ec"/>
+				<text><![CDATA[Outstanding Nominal Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="300" width="120" height="30" uuid="c286c598-7806-4873-a39e-f45921c61004"/>
+				<text><![CDATA[Amount Allotted To Others]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="120" height="30" uuid="75125b5a-cf0a-457b-8124-25c445e05204"/>
+				<text><![CDATA[Next Coupon Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="210" width="120" height="30" uuid="1f7dac85-2b5a-48b8-8a34-93408c1fa7f2"/>
+				<text><![CDATA[Last Coupon Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="240" width="120" height="30" uuid="e34f8854-1ddf-404d-bda0-95bbcee8e0e3"/>
+				<text><![CDATA[Next Index End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="270" width="120" height="30" uuid="0cd81ce4-d473-4207-b0fe-b7c7d70a7945"/>
+				<text><![CDATA[Amount Allotted To Central Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="380" width="80" height="18" uuid="b7ba8f3b-7bd2-4650-8f7c-ab19adfed014"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="400" width="545" height="35" uuid="7b264060-ecb4-48aa-98b5-f7f97837ac7b"/>
+				<textFieldExpression><![CDATA[$F{y_remark}.equals("")?"Record successfully migrated":"Invalid fields : "+$F{y_remark}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="30" width="100" height="30" uuid="a6adfa83-fd33-4b24-8f0d-265687ae4890"/>
+				<textFieldExpression><![CDATA[$F{y_securities_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="30" width="100" height="30" uuid="b2717be9-3b59-42a2-a458-97be95f2ece3"/>
+				<textFieldExpression><![CDATA[$F{z_securities_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="10" width="90" height="13" uuid="c7822e1e-3e65-4595-927a-770926cef7da">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{y_remark}.equals( "" ) ?  $V{msc_count}.getAndIncrement():"NA"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="120" height="20" uuid="0e4235c5-4cdd-4eeb-a887-11f3aace6fce"/>
+				<textElement>
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Migrated Securites Code :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="60" width="100" height="30" uuid="27d21b68-8a26-40c5-8f0f-a446be3f2b6f"/>
+				<textFieldExpression><![CDATA[$F{x_total_redeemed_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="60" width="100" height="30" uuid="9e1d4085-881e-4321-b569-153fad17501e"/>
+				<textFieldExpression><![CDATA[$F{y_total_redeemed_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="60" width="100" height="30" uuid="57ef46cf-8e39-495b-8438-c91b90728035"/>
+				<textFieldExpression><![CDATA[$F{z_total_redeemed_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="90" width="100" height="30" uuid="9e3dc9b4-3602-4f1e-8191-312f4fe2ac4e"/>
+				<textFieldExpression><![CDATA[$F{x_total_nominal_amount_issued_for_erf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="90" width="100" height="30" uuid="f3904dce-d0af-4b4e-a403-ce70445aeb2d"/>
+				<textFieldExpression><![CDATA[$F{y_total_nominal_amount_issued_for_erf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="90" width="100" height="30" uuid="07f6934d-9c94-4bb7-b460-7e1d64677a43"/>
+				<textFieldExpression><![CDATA[$F{z_total_nominal_amount_issued_for_erf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="120" width="100" height="30" uuid="5b269ef0-65d6-4902-ad0e-9a6398ab2628"/>
+				<textFieldExpression><![CDATA[$F{x_total_redeemed_amount_for_erf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="120" width="100" height="30" uuid="3a98c5de-75d9-45ec-bfb3-d0127d7d4e19"/>
+				<textFieldExpression><![CDATA[$F{y_total_redeemed_amount_for_erf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="120" width="100" height="30" uuid="cc1536f9-5f85-4624-9691-7c3439990359"/>
+				<textFieldExpression><![CDATA[$F{z_total_redeemed_amount_for_erf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="150" width="100" height="30" uuid="71769dc6-12a7-4930-a521-52f4d4e1731d"/>
+				<textFieldExpression><![CDATA[$F{x_outstanding_nominal_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="150" width="100" height="30" uuid="cd2af14c-157f-4fdd-9620-ea4bdad59c60"/>
+				<textFieldExpression><![CDATA[$F{y_outstanding_nominal_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="150" width="100" height="30" uuid="b7e4dd95-af27-4e4f-8ce9-39fed7fcb2eb"/>
+				<textFieldExpression><![CDATA[$F{z_outstanding_nominal_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="180" width="100" height="30" uuid="683220f0-4a3c-4289-b94c-d67417915a46"/>
+				<textFieldExpression><![CDATA[$F{x_next_coupon_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="180" width="100" height="30" uuid="f63c7624-5589-445c-bb98-3262650e8eaf"/>
+				<textFieldExpression><![CDATA[$F{y_next_coupon_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="180" width="100" height="30" uuid="107ca974-e16e-437b-9d29-875cc18f3179"/>
+				<textFieldExpression><![CDATA[$F{z_next_coupon_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="210" width="100" height="30" uuid="5eb579cb-cdd9-490e-ba66-d1133156e8a9"/>
+				<textFieldExpression><![CDATA[$F{x_last_coupon_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="210" width="100" height="30" uuid="6b340314-4f14-4a87-b097-e3cdfeb9f46b"/>
+				<textFieldExpression><![CDATA[$F{y_last_coupon_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="210" width="100" height="30" uuid="84d9e653-4f51-43b3-a464-5416625e7af5"/>
+				<textFieldExpression><![CDATA[$F{z_last_coupon_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="240" width="100" height="30" uuid="c9d0c47e-9122-42f5-a4a2-78e6f7cf568f"/>
+				<textFieldExpression><![CDATA[$F{x_next_index_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="240" width="100" height="30" uuid="bf24ce94-2bf1-4e4b-83e4-36e27ada5cd7"/>
+				<textFieldExpression><![CDATA[$F{y_next_index_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="240" width="100" height="30" uuid="f247208a-b430-4a56-b6d3-54b2f8a18fd2"/>
+				<textFieldExpression><![CDATA[$F{z_next_index_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="270" width="100" height="30" uuid="4275671d-364b-465a-974c-59750d1fddea"/>
+				<textFieldExpression><![CDATA[$F{x_amount_allotted_to_central_bank}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="270" width="100" height="30" uuid="8ce5fbef-aaa0-4373-bdeb-64e2c8da6854"/>
+				<textFieldExpression><![CDATA[$F{y_amount_allotted_to_central_bank}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="270" width="100" height="30" uuid="97aa6ce6-37c3-47d8-99eb-689ba960f979"/>
+				<textFieldExpression><![CDATA[$F{z_amount_allotted_to_central_bank}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="300" width="100" height="30" uuid="0d2f4cac-363f-402c-bac2-ee2e8918b416"/>
+				<textFieldExpression><![CDATA[$F{x_amount_allotted_to_others}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="300" width="100" height="30" uuid="1710bba0-0461-4a38-b57e-3c64661ce7a5"/>
+				<textFieldExpression><![CDATA[$F{y_amount_allotted_to_others}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="300" width="100" height="30" uuid="17ba47de-eb11-4275-b614-61aac64962af"/>
+				<textFieldExpression><![CDATA[$F{z_amount_allotted_to_others}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="50">
+			<staticText>
+				<reportElement x="229" y="30" width="140" height="12" uuid="3b009686-edc9-4274-9898-a36d9b179ece"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[*** END  OF  REPORT ***]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

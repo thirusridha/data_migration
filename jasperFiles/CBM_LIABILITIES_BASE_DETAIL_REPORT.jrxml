@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="coupon" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f90f8a2e-10c4-4855-994e-9339e1d54313">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="rtgs"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Dataset1" uuid="e4a72624-d59b-4af9-a38c-97ef92aa29ad">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="rtgs_nets_mig_new"/>
+		<parameter name="Idate" class="java.lang.String"/>
+		<parameter name="where_clause2" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{Idate}==null  || $P{Idate}.trim().isEmpty() ? "1=1": " Date(t.migrated_date) ='"+ $P{Idate}+"'"]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[select count(t.id)  FROM cbm_liabilities_base_detail o  left join
+cbm_liabilities_base_detail_temp t on t.live_table_id=o.id  where $P!{where_clause2}]]>
+		</queryString>
+		<field name="count(t.id)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(t.id)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(t.id)"/>
+		</field>
+	</subDataset>
+	<parameter name="reportID" class="java.lang.String"/>
+	<parameter name="iDate" class="java.lang.String"/>
+	<parameter name="where_clause" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{iDate}==null  || $P{iDate}.trim().isEmpty() ? "1=1": " Date(z.migrated_date) ='"+ $P{iDate}+"'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+IFNULL(x.id,'')AS x_id,
+IFNULL(y.id ,'')AS y_id,
+IFNULL(z.id,'') AS z_id,
+IFNULL(x.member_id,'')AS x_member_id,
+IFNULL(y.member_id ,'')AS y_member_id,
+IFNULL(z.member_id,'') AS z_member_id,
+IFNULL(x.start_date,'')AS x_start_date,
+IFNULL(y.start_date ,'')AS y_start_date,
+IFNULL(z.start_date,'') AS z_start_date,
+IFNULL(x.end_date,'')AS x_end_date,
+IFNULL(y.end_date ,'')AS y_end_date,
+IFNULL(z.end_date,'') AS z_end_date,
+IFNULL(x.ql_lb,'')AS x_ql_lb,
+IFNULL(y.ql_lb ,'')AS y_ql_lb,
+IFNULL(z.ql_lb,'') AS z_ql_lb,
+IFNULL(y.remarks ,'')AS y_remark
+FROM cbm_liabilities_base_detail_source z  left join
+cbm_liabilities_base_detail_temp y on z.id=y.id left join 
+cbm_liabilities_base_detail x on y.live_table_id=x.id AND y.remarks is null where $P!{where_clause}
+ORDER BY z.seq asc]]>
+	</queryString>
+	<field name="x_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_id"/>
+	</field>
+	<field name="y_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_id"/>
+	</field>
+	<field name="z_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_id"/>
+	</field>
+	<field name="x_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_member_id"/>
+	</field>
+	<field name="y_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_member_id"/>
+	</field>
+	<field name="z_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_member_id"/>
+	</field>
+	<field name="x_start_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_start_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_start_date"/>
+	</field>
+	<field name="y_start_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_start_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_start_date"/>
+	</field>
+	<field name="z_start_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_start_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_start_date"/>
+	</field>
+	<field name="x_end_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_end_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_end_date"/>
+	</field>
+	<field name="y_end_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_end_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_end_date"/>
+	</field>
+	<field name="z_end_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_end_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_end_date"/>
+	</field>
+	<field name="x_ql_lb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_ql_lb"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_ql_lb"/>
+	</field>
+	<field name="y_ql_lb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_ql_lb"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_ql_lb"/>
+	</field>
+	<field name="z_ql_lb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_ql_lb"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_ql_lb"/>
+	</field>
+	<field name="y_remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_remark"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_remark"/>
+	</field>
+	<variable name="msc_count" class="java.util.concurrent.atomic.AtomicInteger" calculation="System">
+		<initialValueExpression><![CDATA[new java.util.concurrent.atomic.AtomicInteger(1)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="180" height="18" uuid="f3bceeaf-f81e-4849-bb9c-abda65ff56dd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<"+$P{reportID}+">"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="0" width="200" height="20" uuid="48ea7517-d0df-4ce7-b09d-86faf1ffdd3c"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="470" y="0" width="106" height="20" uuid="8a5dee1e-d5cb-4dd7-a453-011038c823db"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="250" y="0" width="80" height="20" uuid="e4aa4868-82df-47af-9921-6c09f8a63bb2"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCRIPS RTGS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="20" width="240" height="20" uuid="b69f2700-0e86-4e85-9d51-822dbeddcb0d"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA MIGRATION LIABILITIES BASE DETAIL REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="360" y="20" width="100" height="20" uuid="bb6f0bc7-3678-485a-9c71-5e2e6ea7bc44"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="70" height="20" uuid="1c839ec1-b5c1-4bd8-917e-fc160a64e44a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="0" width="51" height="20" uuid="6a765092-ca08-4aa5-80d7-683f32c3edfa"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="84" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="18" width="550" height="62" uuid="3d6308a0-10a8-4ff1-bc65-7062ee95a39a"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Dataset1" uuid="17a53fe1-dcf7-402a-ae88-5c364665b1e8">
+						<datasetParameter name="Idate">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="62" width="550">
+						<staticText>
+							<reportElement x="0" y="0" width="81" height="18" uuid="35472125-f983-4f1b-a274-9978a4686625"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[DETAILS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="180" y="0" width="110" height="18" uuid="12599fcc-c174-4137-9830-9ba1991dab92"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="300" y="0" width="100" height="18" uuid="9e4efd44-ab88-45d7-8643-e64428a75b8e"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Original Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="440" y="0" width="60" height="18" uuid="fb083a5d-2a92-4e76-b648-e5a44e9b7563"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Source]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="18" width="120" height="19" uuid="bd0340e1-fa74-4449-8256-4dcc07923d7c"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Liabilities Base Detail Table - SCRIPS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="37" width="180" height="13" uuid="87c7280a-c151-4afc-b688-d8fdd0e39f10"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Total Liabilities Base Detail migrated to SCRIPS ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="180" y="37" width="91" height="13" uuid="c21cca2c-e60d-44a6-a710-0580f1e53849"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{count(t.id)}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="602" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="3" width="119" height="20" uuid="3001c3df-023e-4b14-872d-be8866e5304d"/>
+				<textElement>
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Migrated Liabilities Base Detail:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="3" width="90" height="13" uuid="432fe797-f571-469e-84cd-bd60817a9ca1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{y_remark}.equals( "" ) ?  $V{msc_count}.getAndIncrement():"NA"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="30" uuid="9ea59937-cbf0-4a05-a8a0-2bd85f543874"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="30" width="100" height="30" uuid="e117cca3-4e31-41c5-a812-d60b0519646f"/>
+				<textFieldExpression><![CDATA[$F{x_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="30" width="100" height="30" uuid="a28f190d-8465-482a-960c-ed4f36904f3d"/>
+				<textFieldExpression><![CDATA[$F{y_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="210" width="80" height="18" uuid="b926706e-8bc1-4900-8028-543cf900e927"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="230" width="545" height="35" uuid="79573cbc-d2d8-42a8-a187-7c2fc3bb7b55"/>
+				<textFieldExpression><![CDATA[$F{y_remark}.equals("")?"Record successfully migrated":"Invalid fields : "+$F{y_remark}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="30" uuid="b9b94d0f-663f-42e5-b29e-a20d00ab48a0"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Member ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="89" width="100" height="30" uuid="ef716758-c749-4980-a97d-3d84bd129bff"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="119" width="100" height="30" uuid="35dcd7c0-e975-43a7-bfe7-af3137a36b8b"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[End Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="60" width="100" height="30" uuid="b635c481-77bb-42c1-a745-1793e9f24ccf"/>
+				<textFieldExpression><![CDATA[$F{x_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="119" width="100" height="30" uuid="c0f7eb38-b15e-4ff4-8ef2-a60eea52dc65"/>
+				<textFieldExpression><![CDATA[$F{x_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="60" width="100" height="30" uuid="a751d5b8-6958-4ef5-b348-4fb4c9e171d2"/>
+				<textFieldExpression><![CDATA[$F{y_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="120" width="100" height="30" uuid="f37d0283-d356-416f-b052-2b5287b19d19"/>
+				<textFieldExpression><![CDATA[$F{y_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="90" width="100" height="30" uuid="611a8a47-04e2-4c6e-bb65-3127a8ef7166"/>
+				<textFieldExpression><![CDATA[$F{y_start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="60" width="100" height="30" uuid="afe71c2d-e891-48ea-9d64-c368560ce4dd"/>
+				<textFieldExpression><![CDATA[$F{z_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="119" width="100" height="30" uuid="a9c28220-f2ab-4214-8b52-9388c9798d47"/>
+				<textFieldExpression><![CDATA[$F{z_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="90" width="100" height="30" uuid="16e60f38-c413-49f6-906f-a688a1a11f37"/>
+				<textFieldExpression><![CDATA[$F{z_start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="89" width="100" height="30" uuid="60f602f7-3c8e-47c9-81cc-3f5f7e07f68b"/>
+				<textFieldExpression><![CDATA[$F{x_start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="149" width="100" height="30" uuid="076e86c1-ea39-44e8-ab43-32821b7a4d12"/>
+				<textFieldExpression><![CDATA[$F{z_ql_lb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="149" width="100" height="30" uuid="378f2adb-31b1-4580-901d-7b7426c4e01e"/>
+				<textFieldExpression><![CDATA[$F{x_ql_lb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="150" width="100" height="30" uuid="f27a5b29-073f-43c4-ac62-f877a042824c"/>
+				<textFieldExpression><![CDATA[$F{y_ql_lb}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="150" width="100" height="30" uuid="6c7adf96-16bf-4ee1-83df-5804661eb0c9"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[QL/LB]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="50">
+			<staticText>
+				<reportElement x="229" y="30" width="140" height="12" uuid="0ac4959e-7e42-430e-9d42-3de0d9ee65dd"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[*** END  OF  REPORT ***]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

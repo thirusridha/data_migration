@@ -1,0 +1,1 @@
+./DataMigration.sh SSS_SECURITIES_CODE_FILE_UPLOAD

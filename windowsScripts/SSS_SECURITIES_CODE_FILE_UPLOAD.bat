@@ -1,0 +1,4 @@
+@echo off
+cls
+setlocal
+DataMigration.bat SSS_SECURITIES_CODE_FILE_UPLOAD

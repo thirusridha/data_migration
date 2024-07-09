@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a12bf909-5f7c-403a-9c3d-41a0bbac7bb6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/interactive/CustomersReport_files/CustomersReport"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/interactive/CustomersReport"/>
+	<parameter name="iDate" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select 'MEMBER' as SRC_TABLE_NAME,(select count(*) from MEMBER_TEMP where activation_date= $P{iDate} ) as SRC_COUNT,'MEMBER' as DEST_TABLE_NAME,(select count(*) from MEMBER where activation_date= $P{iDate} ) as DEST_COUNT
+union all select 'ACCOUNT' as SRC_TABLE_NAME,(select count(*) from ACCOUNT) as SRC_COUNT,'ACCOUNT' as DEST_TABLE_NAME,(select count(*) from ACCOUNT) as DEST_COUNT
+union all  select 'ACCOUNT_POSITION' as SRC_TABLE_NAME,(select count(*) from ACCOUNT_POSITION) as SRC_COUNT,'ACCOUNT_POSITION' as DEST_TABLE_NAME,(select count(*) from ACCOUNT_POSITION) as DEST_COUNT;]]>
+	</queryString>
+	<field name="SRC_TABLE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SRC_TABLE_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="SRC_TABLE_NAME"/>
+	</field>
+	<field name="SRC_COUNT" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="SRC_COUNT"/>
+		<property name="com.jaspersoft.studio.field.label" value="SRC_COUNT"/>
+	</field>
+	<field name="DEST_TABLE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEST_TABLE_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEST_TABLE_NAME"/>
+	</field>
+	<field name="DEST_COUNT" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="DEST_COUNT"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEST_COUNT"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="0" width="210" height="30" uuid="9b8ef310-491f-421d-b1b9-c57b94f89e09"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="390" y="0" width="100" height="30" uuid="9aede8f7-96cf-4f56-a255-889f98fd953a"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="0" width="70" height="30" uuid="a0c17f17-9324-4705-99ae-f1dc286900ab"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="0" width="100" height="30" uuid="75d004a3-4086-4c4d-bcbc-d6b850d1492a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[SCRIPS RTGS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="20" width="300" height="20" uuid="8a4c4603-35de-44d7-a907-d5fd433bd3ad"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[	DATA MIGRATION CONTROL REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="360" y="20" width="100" height="20" uuid="07d1738b-6bc1-42ad-9c86-82be80a5300c"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="500" y="0" width="70" height="30" uuid="8b2aceb2-3e1f-4f29-8bbc-738594103b76"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="100" height="30" uuid="481c173d-d14f-4e02-aa52-2794f147edb1"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Total migrated]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="70" height="30" uuid="f0159561-51bd-4ada-80c9-b819b49e37cc"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="70" height="30" uuid="3f16379d-5f64-4488-94bb-4cc3f965b667"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Total migrated]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="80" height="30" uuid="bc3368ee-c8b4-488a-9361-db034f24456a"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Details Scrips]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30" uuid="3ef02943-6402-4963-a1de-f77b5d55ad64"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Details Scrips]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="70" height="20" uuid="4a800491-90b3-4ed4-af44-06a595ce2eba"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[RTGS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="120" height="30" uuid="84152d56-1bc4-4289-ba4e-3421db329355"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SRC_TABLE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="20" width="70" height="30" uuid="05cc82c4-c0e9-4c97-ba1d-7a2ab5e8fcfe"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SRC_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="20" width="70" height="30" uuid="aad10975-b467-4fd6-a4a7-9bbb20fa34e3"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DEST_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="20" width="110" height="30" uuid="61d7bcbb-5e3a-4eeb-a279-f8a59b221e75"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DEST_TABLE_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="30" width="210" height="30" uuid="705a78da-2054-44b0-9af8-177cab810eb8"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[*** End Of Report ***]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

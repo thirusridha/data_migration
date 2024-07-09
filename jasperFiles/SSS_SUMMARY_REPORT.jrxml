@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a12bf909-5f7c-403a-9c3d-41a0bbac7bb6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/interactive/CustomersReport_files/CustomersReport"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/interactive/CustomersReport"/>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="6d9840c6-cade-4c55-8941-da69f76e8b59">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<parameter name="iDate1" class="java.lang.String"/>
+		<parameter name="Parameter1" class="java.lang.String"/>
+		<parameter name="Parameter2" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select 'Total Members migrated from MEPS+' as SRC_TABLE_NAME,(select count(*) from sss_securities_code_temp where DATE(migrated_date)= $P{iDate1} ) as SRC_COUNT,'Total Members migrated to SCRIPS' as DEST_TABLE_NAME,(select count(*) from sss_securities_code where DATE(migrated_date)= $P{iDate1} ) as DEST_COUNT
+union all
+select * from(
+
+(select CASE
+    WHEN a.securities_status1 = 'ACT' THEN 'Security Code: ACTIVE'
+    WHEN a.securities_status1 = 'CLO' THEN 'Security Code: CLOSED'
+     WHEN a.securities_status1 = 'FRZ' THEN 'Security Code: FROZEN'
+      WHEN a.securities_status1 = 'PEN' THEN 'Security Code: PENDING ACTIVATION'
+       WHEN a.securities_status1 = 'SUS' THEN 'Security Code: SUSPENDED'
+    ELSE 'WRONGSTATUS' END AS SRC_TABLE_NAME
+,
+count(b.securities_status) as SRC_COUNT from
+(select 'ACT' securities_status1
+union all
+select 'CLO' securities_status1
+union all
+select 'FRZ' securities_status1
+union all
+select 'PEN' securities_status1
+union all
+select 'SUS' securities_status1
+)a
+left join sss_securities_code_temp b on a.securities_status1=b.securities_status and DATE(migrated_date)= $P{iDate1}  
+group by a.securities_status1
+order by a.securities_status1 asc) t1,
+
+(select CASE
+    WHEN a.securities_status1 = 'ACT' THEN 'Security Code: ACTIVE'
+    WHEN a.securities_status1 = 'CLO' THEN 'Security Code: CLOSED'
+     WHEN a.securities_status1 = 'FRZ' THEN 'Security Code: FROZEN'
+      WHEN a.securities_status1 = 'PEN' THEN 'Security Code: PENDING ACTIVATION'
+       WHEN a.securities_status1 = 'SUS' THEN 'Security Code: SUSPENDED'
+    ELSE 'WRONGSTATUS' END AS DEST_TABLE_NAME
+,
+count(b.securities_status) as DEST_COUNT from
+(select 'ACT' securities_status1
+union all
+select 'CLO' securities_status1
+union all
+select 'FRZ' securities_status1
+union all
+select 'PEN' securities_status1
+union all
+select 'SUS' securities_status1
+)a
+left join sss_securities_code b on a.securities_status1=b.securities_status and DATE(migrated_date)= $P{iDate1}   
+group by a.securities_status1
+order by a.securities_status1 asc
+)t2
+) where t1.SRC_TABLE_NAME=t2.DEST_TABLE_NAME]]>
+		</queryString>
+		<field name="SRC_TABLE_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SRC_TABLE_NAME"/>
+			<property name="com.jaspersoft.studio.field.label" value="SRC_TABLE_NAME"/>
+		</field>
+		<field name="SRC_COUNT" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="SRC_COUNT"/>
+			<property name="com.jaspersoft.studio.field.label" value="SRC_COUNT"/>
+		</field>
+		<field name="DEST_TABLE_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DEST_TABLE_NAME"/>
+			<property name="com.jaspersoft.studio.field.label" value="DEST_TABLE_NAME"/>
+		</field>
+		<field name="DEST_COUNT" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="DEST_COUNT"/>
+			<property name="com.jaspersoft.studio.field.label" value="DEST_COUNT"/>
+		</field>
+	</subDataset>
+	<subDataset name="Dataset2" whenResourceMissingType="Error" uuid="da48e74e-717d-4b6a-ab99-a5dc0fa28863">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<parameter name="iDate1" class="java.lang.String"/>
+		<parameter name="iDate" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[
+select * from(
+(select CASE
+    WHEN a.securities_type1 = 'SGS' THEN 'Security Code Type:SGS'
+    WHEN a.securities_type1 = 'FRN' THEN 'Security Code Type:FRN'
+     WHEN a.securities_type1 = 'SSB' THEN 'Security Code Type:SSB'
+      WHEN a.securities_type1 = 'T-Bills' THEN 'Security Code Type:T-Bills'
+       WHEN a.securities_type1 = 'M-Bills' THEN 'Security Code Type:M-Bills'
+       WHEN a.securities_type1 = 'CMTB' THEN 'Security Code Type:CMTB'
+       WHEN a.securities_type1 = 'SGS Infra' THEN 'Security Code Type:SGS Infra'
+    ELSE 'WRONGSTATUS' END AS SRC_TABLE_NAME1
+,
+count(b.securities_type) as SRC_COUNT1 from
+(select 'SGS' securities_type1
+union all
+select 'FRN' securities_type1
+union all
+select 'SSB' securities_type1
+union all
+select 'T-Bills' securities_type1
+union all
+select 'M-Bills' securities_type1
+union all
+select 'CMTB'  securities_type1
+union all
+select 'SGS Infra'  securities_type1
+)a
+left join sss_securities_code_temp b on a.securities_type1=b.securities_type and DATE(migrated_date)= $P{iDate1} 
+group by a.securities_type1
+order by a.securities_type1 asc) t1,
+
+(select CASE
+    WHEN a.securities_type1 = 'SGS' THEN 'Security Code Type:SGS'
+    WHEN a.securities_type1 = 'FRN' THEN 'Security Code Type:FRN'
+     WHEN a.securities_type1 = 'SSB' THEN 'Security Code Type:SSB'
+      WHEN a.securities_type1 = 'T-Bills' THEN 'Security Code Type:T-Bills'
+       WHEN a.securities_type1 = 'M-Bills' THEN 'Security Code Type:M-Bills'
+       WHEN a.securities_type1 = 'CMTB' THEN 'Security Code Type:CMTB'
+       WHEN a.securities_type1 = 'SGS Infra' THEN 'Security Code Type:SGS Infra'
+    
+    ELSE 'WRONGSTATUS' END AS DEST_TABLE_NAME1
+,
+count(b.securities_type) as DEST_COUNT1 from
+(select 'SGS' securities_type1
+union all
+select 'FRN' securities_type1
+union all
+select 'SSB' securities_type1
+union all
+select 'T-Bills' securities_type1
+union all
+select 'M-Bills' securities_type1
+union all
+select 'CMTB' securities_type1
+union all
+select 'SGS Infra' securities_type1
+)a
+left join sss_securities_code b on a.securities_type1=b.securities_type  and DATE(migrated_date)= $P{iDate1} 
+group by a.securities_type1
+order by a.securities_type1 asc
+)t2
+) where t1.SRC_TABLE_NAME1=t2.DEST_TABLE_NAME1
+]]>
+		</queryString>
+		<field name="SRC_TABLE_NAME1" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SRC_TABLE_NAME1"/>
+			<property name="com.jaspersoft.studio.field.label" value="SRC_TABLE_NAME1"/>
+		</field>
+		<field name="SRC_COUNT1" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="SRC_COUNT1"/>
+			<property name="com.jaspersoft.studio.field.label" value="SRC_COUNT1"/>
+		</field>
+		<field name="DEST_TABLE_NAME1" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DEST_TABLE_NAME1"/>
+			<property name="com.jaspersoft.studio.field.label" value="DEST_TABLE_NAME1"/>
+		</field>
+		<field name="DEST_COUNT1" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="DEST_COUNT1"/>
+			<property name="com.jaspersoft.studio.field.label" value="DEST_COUNT1"/>
+		</field>
+	</subDataset>
+	<subDataset name="Dataset3" uuid="496b80e1-617d-473c-827e-77026be555f4">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<parameter name="iDate1" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select * from(
+(select CASE
+    WHEN a.issuer1 = 'MAS' THEN 'Sector:MAS'
+    WHEN a.issuer1 = 'AGD' THEN 'Sector:AGD'
+     WHEN a.issuer1 = 'Temasek' THEN 'Sector:Temasek'
+      WHEN a.issuer1 = 'HDB' THEN 'Sector:HDB'
+       WHEN a.issuer1 = 'SIA' THEN 'Sector:SIA'
+       WHEN a.issuer1 = 'NEA' THEN 'Sector:NEA'
+       WHEN a.issuer1 = 'Sembcorp' THEN 'Sector:Sembcorp'
+       WHEN a.issuer1 = 'Singtel' THEN 'Sector:Singtel'
+       WHEN a.issuer1 = 'CAG' THEN 'Sector:CAG'
+       WHEN a.issuer1 = 'UOB' THEN 'Sector:UOB'
+       WHEN a.issuer1 = 'NTU' THEN 'Sector:NTU'
+       WHEN a.issuer1 = 'AIA' THEN 'Sector:AIA'
+       WHEN a.issuer1 = 'PUB' THEN 'Sector:PUB'
+       WHEN a.issuer1 = 'LTA' THEN 'Sector:LTA'
+       WHEN a.issuer1 = 'SLF' THEN 'Sector:SLF'
+    ELSE 'WRONGSTATUS' END AS SRC_TABLE_NAME2
+,
+count(b.issuer) as SRC_COUNT2 from
+(select 'MAS' issuer1
+union all
+select 'AGD' issuer1
+union all
+select 'Temasek' issuer1
+union all
+select 'HDB' issuer1
+union all
+select 'SIA' issuer1
+union all
+select 'NEA' issuer1
+union all
+select 'Sembcorp' issuer1
+union all
+select 'Singtel' issuer1
+union all
+select 'CAG' issuer1
+union all
+select 'UOB' issuer1
+union all
+select 'NTU' issuer1
+union all
+select 'AIA' issuer1
+union all
+select 'PUB' issuer1
+union all
+select 'LTA' issuer1
+union all
+select 'SLF' issuer1
+)a
+left join sss_securities_code_temp b on a.issuer1=b.issuer and DATE(migrated_date)= $P{iDate1} 
+group by a.issuer1
+order by a.issuer1 asc) t1,
+
+(select CASE
+    WHEN a.issuer1 = 'MAS' THEN 'Sector:MAS'
+    WHEN a.issuer1 = 'AGD' THEN 'Sector:AGD'
+     WHEN a.issuer1 = 'Temasek' THEN 'Sector:Temasek'
+      WHEN a.issuer1 = 'HDB' THEN 'Sector:HDB'
+       WHEN a.issuer1 = 'SIA' THEN 'Sector:SIA'
+       WHEN a.issuer1 = 'NEA' THEN 'Sector:NEA'
+       WHEN a.issuer1 = 'Sembcorp' THEN 'Sector:Sembcorp'
+       WHEN a.issuer1 = 'Singtel' THEN 'Sector:Singtel'
+       WHEN a.issuer1 = 'CAG' THEN 'Sector:CAG'
+       WHEN a.issuer1 = 'UOB' THEN 'Sector:UOB'
+       WHEN a.issuer1 = 'NTU' THEN 'Sector:NTU'
+       WHEN a.issuer1 = 'AIA' THEN 'Sector:AIA'
+       WHEN a.issuer1 = 'PUB' THEN 'Sector:PUB'
+       WHEN a.issuer1 = 'LTA' THEN 'Sector:LTA'
+       WHEN a.issuer1 = 'SLF' THEN 'Sector:SLF'
+    ELSE 'WRONGSTATUS' END AS DEST_TABLE_NAME2
+,
+count(b.issuer) as DEST_COUNT2 from
+(select 'MAS' issuer1
+union all
+select 'AGD' issuer1
+union all
+select 'Temasek' issuer1
+union all
+select 'HDB' issuer1
+union all
+select 'SIA' issuer1
+union all
+select 'NEA' issuer1
+union all
+select 'Sembcorp' issuer1
+union all
+select 'Singtel' issuer1
+union all
+select 'CAG' issuer1
+union all
+select 'UOB' issuer1
+union all
+select 'NTU' issuer1
+union all
+select 'AIA' issuer1
+union all
+select 'PUB' issuer1
+union all
+select 'LTA' issuer1
+union all
+select 'SLF' issuer1
+)a
+left join sss_securities_code b on a.issuer1=b.issuer and DATE(migrated_date)= $P{iDate1} 
+group by a.issuer1
+order by a.issuer1 asc
+)t2
+) where t1.SRC_TABLE_NAME2=t2.DEST_TABLE_NAME2
+]]>
+		</queryString>
+		<field name="SRC_TABLE_NAME2" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SRC_TABLE_NAME2"/>
+			<property name="com.jaspersoft.studio.field.label" value="SRC_TABLE_NAME2"/>
+		</field>
+		<field name="SRC_COUNT2" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="SRC_COUNT2"/>
+			<property name="com.jaspersoft.studio.field.label" value="SRC_COUNT2"/>
+		</field>
+		<field name="DEST_TABLE_NAME2" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="DEST_TABLE_NAME2"/>
+			<property name="com.jaspersoft.studio.field.label" value="DEST_TABLE_NAME2"/>
+		</field>
+		<field name="DEST_COUNT2" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="DEST_COUNT2"/>
+			<property name="com.jaspersoft.studio.field.label" value="DEST_COUNT2"/>
+		</field>
+	</subDataset>
+	<parameter name="iDate" class="java.lang.String" evaluationTime="Late"/>
+	<parameter name="reportID" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select CASE
+    WHEN a.member_status1 = 'ACT' THEN 'Member Status: ACTIVE'
+    WHEN a.member_status1 = 'CLO' THEN 'Member Status: CLOSED'
+     WHEN a.member_status1 = 'FRZ' THEN 'Member Status: FROZEN'
+      WHEN a.member_status1 = 'PEN' THEN 'Member Status: PENDING ACTIVATION'
+       WHEN a.member_status1 = 'SUS' THEN 'Member Status: SUSPENDED'
+    ELSE 'WRONGSTATUS' END AS SRC_TABLE_NAME1
+,
+count(b.member_status) as SRC_COUNT1 from
+(select 'ACT' member_status1
+union all
+select 'CLO' member_status1
+union all
+select 'FRZ' member_status1
+union all
+select 'PEN' member_status1
+union all
+select 'SUS' member_status1
+)a
+left join MEMBER_TEMP b on a.member_status1=b.member_status and activation_date='2021-12-26'
+group by a.member_status1
+order by a.member_status1 asc]]>
+	</queryString>
+	<field name="SRC_TABLE_NAME1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SRC_TABLE_NAME1"/>
+		<property name="com.jaspersoft.studio.field.label" value="SRC_TABLE_NAME1"/>
+	</field>
+	<field name="SRC_COUNT1" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="SRC_COUNT1"/>
+		<property name="com.jaspersoft.studio.field.label" value="SRC_COUNT1"/>
+	</field>
+	<variable name="V_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="Page" incrementType="Page">
+		<variableExpression><![CDATA[1]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="0" width="210" height="20" uuid="9b8ef310-491f-421d-b1b9-c57b94f89e09"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="459" y="0" width="120" height="20" uuid="65d23661-6aa4-4e1f-aa97-55993b8f3867"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="181" height="18" uuid="ffabc31b-15b0-4c99-99b8-fbeca543de56"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<"+$P{reportID}+">"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="234" y="0" width="70" height="20" uuid="75d004a3-4086-4c4d-bcbc-d6b850d1492a"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCRIPS SSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="20" width="172" height="20" uuid="8a4c4603-35de-44d7-a907-d5fd433bd3ad"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA MIGRATION SUMMARY REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="366" y="20" width="100" height="20" uuid="07d1738b-6bc1-42ad-9c86-82be80a5300c"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="0" width="70" height="20" uuid="fc980fc9-795a-4fa4-928f-f528f57178d9"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="0" width="51" height="20" uuid="41b003d6-b9f0-458f-b1e9-eaecf7c7d248"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="480" y="0" width="90" height="30" uuid="481c173d-d14f-4e02-aa52-2794f147edb1"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="100" height="30" uuid="3f16379d-5f64-4488-94bb-4cc3f965b667"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="0" width="190" height="30" uuid="bc3368ee-c8b4-488a-9361-db034f24456a"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETAILS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="190" height="30" uuid="3ef02943-6402-4963-a1de-f77b5d55ad64"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETAILS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="0" y="6" width="570" height="24" uuid="5274b7db-3db2-4599-990a-70407054c8c4">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="7c3cec86-0158-43d7-92ee-2975adf56b5e">
+						<datasetParameter name="iDate1">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="190" uuid="843cbf92-c248-4f90-9c50-a8ed8a9562eb">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="190" height="30" uuid="3b038e21-0d3e-4556-b6e5-8bd6ebd28577"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SRC_TABLE_NAME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="dc460543-0847-48e5-9f8c-ec10483d3395">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="325429c9-db55-4852-baee-72431879de2a"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SRC_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="190" uuid="2410d236-aa73-4a35-b8ed-b7f43ef2dbf3">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="190" height="30" uuid="2fb6272b-d1c9-46e6-860f-7763f41227a0"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{DEST_TABLE_NAME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="75" uuid="6c6bb8e5-f5d8-4ede-b657-1f3a823da98c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="75" height="30" uuid="436bd0bf-9557-40f1-8402-584a543484ef"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{DEST_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="23">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="0" y="3" width="550" height="20" uuid="690b4661-615d-49d5-9706-2779104d05a4">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset2" uuid="b2ca3012-4169-4cc5-8b36-63124e499691">
+						<datasetParameter name="iDate1">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="190" uuid="edac1f9e-4dc6-4ec0-8277-6a66b1fb29c3">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:detailCell height="30">
+							<textField>
+								<reportElement x="0" y="0" width="190" height="30" uuid="85f1739d-9fc0-477e-b23a-3bcd4cfaf4e7"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SRC_TABLE_NAME1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="c49fba62-c57a-4d8c-8bed-38575938cf11">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:detailCell height="30">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="ed7039e1-2c02-48c1-9f5c-47beac2674e4"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SRC_COUNT1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="190" uuid="78e2b8e3-ce86-4c75-95b3-6710972b3e64">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:detailCell height="30">
+							<textField>
+								<reportElement x="0" y="0" width="190" height="30" uuid="cab6373b-56bb-4f6d-800c-9ee31a4635f6"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{DEST_TABLE_NAME1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="75" uuid="e846d3de-3571-4b0e-81a8-65c28b0b6227">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:detailCell height="30">
+							<textField>
+								<reportElement x="0" y="0" width="75" height="30" uuid="d7c8884d-59bc-4631-b65c-fbdc2a1a4775"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{DEST_COUNT1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="20">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="0" y="2" width="570" height="18" uuid="27ca879e-a1a8-4803-9ff6-443a8f0e65da">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset3" uuid="f94832d9-705e-4a3e-bb81-609984a67d05">
+						<datasetParameter name="iDate1">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="190" uuid="f0bb9a79-850e-407c-b55f-e431c6344ef6">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="190" height="30" uuid="5bdf49ea-1bb5-47b0-8c23-630e220618ea"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SRC_TABLE_NAME2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="85aef4f7-e92f-413c-86d9-4a0ad459f6df">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="893dbfb3-75b0-4eea-a454-d721066a1801"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SRC_COUNT2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="190" uuid="326f6034-127a-4514-921b-6d2e319b6b8d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="190" height="30" uuid="0a9aa7e8-d305-4486-9e59-2ad89d2a18d0"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{DEST_TABLE_NAME2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="7ace0b00-d65e-42a0-95ae-3d7cc167d51d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="2b77d755-170d-4d13-acb0-1634468e9b20"/>
+								<textElement textAlignment="Left">
+									<font fontName="SansSerif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{DEST_COUNT2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="40">
+			<staticText>
+				<reportElement x="181" y="10" width="160" height="30" uuid="87b170d3-ad07-4cb0-bed9-5aeab0c98755"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[*** End Of Report ***]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

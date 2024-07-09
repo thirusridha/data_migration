@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="588ffcc0-827c-48ca-8467-92d56f0ec1b2">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="rtgs_nets_mig_new"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="387"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="605"/>
+	<subDataset name="Dataset1" uuid="1610806e-fd54-4e20-85d8-5370371f8ecf">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="rtgs_nets_mig_new"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[select count(id) from account]]>
+		</queryString>
+		<field name="count(id)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(id)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(id)"/>
+		</field>
+	</subDataset>
+	<parameter name="iDate" class="java.lang.String"/>
+	<parameter name="reportID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+  COUNT(case when account_type ="AGDA"  then "x" else NULL end) as AGDA,
+  COUNT(case when account_type = "CCAC" then "x" else NULL end) as CCAC,
+  COUNT(case when account_type ="NOPA"  then "x" else NULL end) as NOPA,
+  COUNT(case when account_type = "RESV" then "x" else NULL end) as RESV,
+  COUNT(case when account_type ="SETT"  then "x" else NULL end) as SETT,
+  COUNT(case when account_type = "VOST" then "x" else NULL end) as VOST,
+  COUNT(case when status ="Active" then "x" else NULL end) as Active,
+  COUNT(case when status ="Closed" then "x" else NULL end) as Closed,
+  COUNT(case when status ="Suspended" then "x" else NULL end) as Suspended
+from
+  account]]>
+	</queryString>
+	<field name="AGDA" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="AGDA"/>
+		<property name="com.jaspersoft.studio.field.label" value="AGDA"/>
+	</field>
+	<field name="CCAC" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="CCAC"/>
+		<property name="com.jaspersoft.studio.field.label" value="CCAC"/>
+	</field>
+	<field name="NOPA" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="NOPA"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOPA"/>
+	</field>
+	<field name="RESV" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="RESV"/>
+		<property name="com.jaspersoft.studio.field.label" value="RESV"/>
+	</field>
+	<field name="SETT" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="SETT"/>
+		<property name="com.jaspersoft.studio.field.label" value="SETT"/>
+	</field>
+	<field name="VOST" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="VOST"/>
+		<property name="com.jaspersoft.studio.field.label" value="VOST"/>
+	</field>
+	<field name="Active" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="Active"/>
+		<property name="com.jaspersoft.studio.field.label" value="Active"/>
+	</field>
+	<field name="Closed" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="Closed"/>
+		<property name="com.jaspersoft.studio.field.label" value="Closed"/>
+	</field>
+	<field name="Suspended" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="Suspended"/>
+		<property name="com.jaspersoft.studio.field.label" value="Suspended"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="0" width="200" height="20" uuid="2b0f3c39-4cfe-4beb-84a9-8739f46a3dc0"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="468" y="0" width="105" height="20" uuid="33d54db1-7474-4eaf-8c30-90ae2f26c333"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="180" height="18" uuid="e79a925f-0170-4dce-92a8-48c18a86344d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<"+$P{reportID}+">"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="245" y="0" width="80" height="20" uuid="488577ed-e831-4c0f-9207-fd54e1d7fd98"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCRIPS RTGS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="20" width="207" height="20" uuid="53ca2182-7580-4de8-93c4-ee9412a2876c"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA MIGRATION ACCOUNT SUMMARY REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="380" y="20" width="100" height="20" uuid="b6aef479-ca3c-485a-a144-a8fa0dc2c5ee"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="70" height="20" uuid="84d7f2c0-ca5e-47f3-b4d5-76acb6efdb2a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="0" width="51" height="20" uuid="4d17bb56-fde5-477b-a3ef-12515bdeee8b"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="63">
+			<componentElement>
+				<reportElement x="0" y="0" width="571" height="60" uuid="d7c5d663-0b5c-41bb-a180-fe7c6dbac6fb"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Dataset1" uuid="06a0e617-6e89-4c8f-a493-aedd969019f9">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="60" width="571">
+						<staticText>
+							<reportElement x="0" y="0" width="81" height="18" uuid="e811a525-fa06-45d0-b612-b56f6b49a4a7"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[DETAILS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="180" y="0" width="110" height="18" uuid="e8858844-89d2-4b97-b358-f76ccd174b2f"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Count]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="37" width="160" height="13" uuid="5f4d2234-a0b1-48e7-b84c-345a8356dd5d"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Total Accounts migrated from MEPS +]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="180" y="37" width="91" height="13" uuid="7f21431d-bd1f-4695-8fe5-cb7df3156c48"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{count(id)}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="358" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="20" width="100" height="30" uuid="e83ca996-e4d0-49c9-8f75-7c542b5265ad"/>
+				<textFieldExpression><![CDATA[$F{AGDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="50" width="100" height="30" uuid="dd6d07db-83f3-4803-a438-e9c4f32e341c"/>
+				<textFieldExpression><![CDATA[$F{CCAC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="130" height="30" uuid="cfc12d5c-d9e1-4211-9228-a60ab633d512">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Account Type : AGDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="130" height="30" uuid="6e5c534c-a314-405c-9bf7-8f6d786a5eeb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Account Type : CCAC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="130" height="30" uuid="c056a55c-979a-4bcb-812c-41eb682e82a0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Account Type : NOPA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="130" height="30" uuid="b73ecb82-da9f-4300-9b6c-b2998720b5c7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Account Type : RESV]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="80" width="100" height="30" uuid="44a96eab-d71e-4b92-b3f2-0390b8deaecb"/>
+				<textFieldExpression><![CDATA[$F{NOPA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="110" width="100" height="30" uuid="028b46c6-b893-4270-8ef9-cd614de4cee5"/>
+				<textFieldExpression><![CDATA[$F{RESV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="130" height="30" uuid="2ed674fa-e694-4c1f-bebe-3b9f16d4d2bb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Account Type : SETT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="170" width="130" height="30" uuid="d8689f3d-7098-4f4d-91bd-e727fd578c4b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Account Type : VOST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="220" width="130" height="30" uuid="6dca869e-bcec-4959-af57-7755a6944b55"/>
+				<text><![CDATA[Account Status : Active]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="250" width="130" height="30" uuid="5f88aeff-eb3f-42af-a276-b8f2f7d2416e"/>
+				<text><![CDATA[Account Status : Closed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="280" width="130" height="30" uuid="052291b4-f214-4ec9-9eec-c4f2edb9437d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Account Status : Suspended]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="140" width="100" height="30" uuid="cf3f1b5e-28d3-411b-9cb4-12406e701eb3"/>
+				<textFieldExpression><![CDATA[$F{SETT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="170" width="100" height="30" uuid="9a46cd79-ebc1-4860-aadf-3438d780706d"/>
+				<textFieldExpression><![CDATA[$F{VOST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="250" width="100" height="30" uuid="6e28b5f6-ee70-46e6-bd9d-50e8ffc6888f"/>
+				<textFieldExpression><![CDATA[$F{Closed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="280" width="100" height="30" uuid="0c7661f2-be92-4f3a-9681-1aa2432f927d"/>
+				<textFieldExpression><![CDATA[$F{Suspended}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="220" width="100" height="30" uuid="685c0e82-ff8c-4b73-8a35-d1193b4b2b75"/>
+				<textFieldExpression><![CDATA[$F{Active}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

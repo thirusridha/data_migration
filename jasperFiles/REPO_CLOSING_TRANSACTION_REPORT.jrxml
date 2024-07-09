@@ -1,0 +1,1696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="coupon" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f90f8a2e-10c4-4855-994e-9339e1d54313">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sss"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="403"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="590"/>
+	<subDataset name="Dataset1" uuid="218deb05-1dd5-4ceb-88b1-d2f825522715">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SSS_Data_Migration"/>
+		<parameter name="Idate" class="java.lang.String"/>
+		<parameter name="where_clause2" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{Idate}==null  || $P{Idate}.trim().isEmpty() ? "1=1": " Date(created_date) ='"+ $P{Idate}+"'"]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[select count(sss_reference) from transaction where $P!{where_clause2}]]>
+		</queryString>
+		<field name="count(sss_reference)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(sss_reference)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(sss_reference)"/>
+		</field>
+	</subDataset>
+	<parameter name="reportID" class="java.lang.String"/>
+	<parameter name="iDate" class="java.lang.String"/>
+	<parameter name="where_clause" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{iDate}==null  || $P{iDate}.trim().isEmpty() ? "1=1": " Date(z.migrated_date) ='"+ $P{iDate}+"'"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select 
+IFNULL(x.sss_reference,'')AS x_sss_reference,
+IFNULL(y.sss_reference ,'')AS y_sss_reference,
+IFNULL(z.sss_reference,'') AS z_sss_reference,
+IFNULL(x.message_log_id,'')AS x_message_log_id,
+IFNULL(y.message_log_id ,'')AS y_message_log_id,
+IFNULL(z.message_log_id,'') AS z_message_log_id,
+IFNULL(x.securities_code,'')AS x_securities_code,
+IFNULL(y.securities_code ,'')AS y_securities_code,
+IFNULL(z.securities_code,'') AS z_securities_code,
+IFNULL(x.transaction_type,'')AS x_transaction_type,
+IFNULL(y.transaction_type ,'')AS y_transaction_type,
+IFNULL(z.transaction_type,'') AS z_transaction_type,
+IFNULL(x.status,'')AS x_status,
+IFNULL(y.status,'')AS y_status,
+IFNULL(z.status,'') AS z_status,
+IFNULL(x.settlement_date,'')AS x_settlement_date,
+IFNULL(y.settlement_date ,'')AS y_settlement_date,
+IFNULL(z.settlement_date,'') AS z_settlement_date,
+IFNULL(x.trade_date,'')AS x_trade_date,
+IFNULL(y.trade_date ,'')AS y_trade_date,
+IFNULL(z.trade_date,'') AS z_trade_date,
+IFNULL(x.currency_code,'')AS x_currency_code,
+IFNULL(y.currency_code ,'')AS y_currency_code,
+IFNULL(z.currency_code,'') AS z_currency_code,
+IFNULL(x.settlement_amount,'')AS x_settlement_amount,
+IFNULL(y.settlement_amount ,'')AS y_settlement_amount,
+IFNULL(z.settlement_amount,'') AS z_settlement_amount,
+IFNULL(x.nominal_amount,'')AS x_nominal_amount,
+IFNULL(y.nominal_amount ,'')AS y_nominal_amount,
+IFNULL(z.nominal_amount,'') AS z_nominal_amount,
+IFNULL(x.deal_price,'')AS x_deal_price,
+IFNULL(y.deal_price ,'')AS y_deal_price,
+IFNULL(z.deal_price,'') AS z_deal_price,
+IFNULL(x.deliverer_member_code,'')AS x_deliverer_member_code,
+IFNULL(y.deliverer_member_code ,'')AS y_deliverer_member_code,
+IFNULL(z.deliverer_member_code,'') AS z_deliverer_member_code,
+IFNULL(x.receiver_member_code,'')AS x_receiver_member_code,
+IFNULL(y.receiver_member_code ,'')AS y_receiver_member_code,
+IFNULL(z.receiver_member_code,'') AS z_receiver_member_code,
+IFNULL(x.repo_closing_date,'')AS x_repo_closing_date,
+IFNULL(y.repo_closing_date ,'')AS y_repo_closing_date,
+IFNULL(z.repo_closing_date,'') AS z_repo_closing_date,
+IFNULL(x.repo_closing_settlement_amount,'')AS x_repo_closing_settlement_amount,
+IFNULL(y.repo_closing_settlement_amount ,'')AS y_repo_closing_settlement_amount,
+IFNULL(z.repo_closing_settlement_amount,'') AS z_repo_closing_settlement_amount,
+IFNULL(x.reason_code,'')AS x_reason_code,
+IFNULL(y.reason_code ,'')AS y_reason_code,
+IFNULL(z.reason_code,'') AS z_reason_code,
+IFNULL(x.transaction_reference,'')AS x_transaction_reference,
+IFNULL(y.transaction_reference ,'')AS y_transaction_reference,
+IFNULL(z.transaction_reference,'') AS z_transaction_reference,
+IFNULL(x.processed_date,'')AS x_processed_date,
+IFNULL(y.processed_date ,'')AS y_processed_date,
+IFNULL(z.processed_date,'') AS z_processed_date,
+IFNULL(x.created_date,'')AS x_created_date,
+IFNULL(y.created_date ,'')AS y_created_date,
+IFNULL(z.created_date,'') AS z_created_date,
+IFNULL(x.modified_date,'')AS x_modified_date,
+IFNULL(y.modified_date ,'')AS y_modified_date,
+IFNULL(z.modified_date,'') AS z_modified_date,
+IFNULL(x.sender_member_swift_code,'')AS x_sender_member_swift_code,
+IFNULL(y.sender_member_swift_code ,'')AS y_sender_member_swift_code,
+IFNULL(z.sender_member_swift_code,'') AS z_sender_member_swift_code,
+IFNULL(x.payer_member_swift_code,'')AS x_payer_member_swift_code,
+IFNULL(y.payer_member_swift_code ,'')AS y_payer_member_swift_code,
+IFNULL(z.payer_member_swift_code,'') AS z_payer_member_swift_code,
+IFNULL(x.payee_member_swift_code,'')AS x_payee_member_swift_code,
+IFNULL(y.payee_member_swift_code ,'')AS y_payee_member_swift_code,
+IFNULL(z.payee_member_swift_code,'') AS z_payee_member_swift_code,
+IFNULL(x.receiver_member_swift_code,'')AS x_receiver_member_swift_code,
+IFNULL(y.receiver_member_swift_code ,'')AS y_receiver_member_swift_code,
+IFNULL(z.receiver_member_swift_code,'') AS z_receiver_member_swift_code,
+IFNULL(x.sender_member_code,'')AS x_sender_member_code,
+IFNULL(y.sender_member_code ,'')AS y_sender_member_code,
+IFNULL(z.sender_member_code,'') AS z_sender_member_code,
+IFNULL(x.sender_type,'')AS x_sender_type,
+IFNULL(y.sender_type ,'')AS y_sender_type,
+IFNULL(z.sender_type,'') AS z_sender_type,
+IFNULL(x.message_type,'')AS x_message_type,
+IFNULL(y.message_type ,'')AS y_message_type,
+IFNULL(z.message_type,'') AS z_message_type,
+IFNULL(x.receiver_rtgs_account,'')AS x_receiver_rtgs_account,
+IFNULL(y.receiver_rtgs_account ,'')AS y_receiver_rtgs_account,
+IFNULL(z.receiver_rtgs_account,'') AS z_receiver_rtgs_account,
+IFNULL(x.deliverer_rtgs_account,'')AS x_deliverer_rtgs_account,
+IFNULL(y.deliverer_rtgs_account ,'')AS y_deliverer_rtgs_account,
+IFNULL(z.deliverer_rtgs_account,'') AS z_deliverer_rtgs_account,
+IFNULL(x.receiver_rtgs_member_code,'')AS x_receiver_rtgs_member_code,
+IFNULL(y.receiver_rtgs_member_code ,'')AS y_receiver_rtgs_member_code,
+IFNULL(z.receiver_rtgs_member_code,'') AS z_receiver_rtgs_member_code,
+IFNULL(x.deliverer_rtgs_member_code,'')AS x_deliverer_rtgs_member_code,
+IFNULL(y.deliverer_rtgs_member_code ,'')AS y_deliverer_rtgs_member_code,
+IFNULL(z.deliverer_rtgs_member_code,'') AS z_deliverer_rtgs_member_code,
+IFNULL(x.hold_indicator,'')AS x_hold_indicator,
+IFNULL(y.hold_indicator ,'')AS y_hold_indicator,
+IFNULL(z.hold_indicator,'') AS z_hold_indicator,
+IFNULL(x.payment_type,'')AS x_payment_type,
+IFNULL(y.payment_type ,'')AS y_payment_type,
+IFNULL(z.payment_type,'') AS z_payment_type,
+IFNULL(x.grid_lock_indicator,'')AS x_grid_lock_indicator,
+IFNULL(y.grid_lock_indicator ,'')AS y_grid_lock_indicator,
+IFNULL(z.grid_lock_indicator,'') AS z_grid_lock_indicator,
+IFNULL(x.rollover_count,'')AS x_rollover_count,
+IFNULL(y.rollover_count ,'')AS y_rollover_count,
+IFNULL(z.rollover_count,'') AS z_rollover_count,
+IFNULL(x.pending_cancellation_indicator,'')AS x_pending_cancellation_indicator,
+IFNULL(y.pending_cancellation_indicator ,'')AS y_pending_cancellation_indicator,
+IFNULL(z.pending_cancellation_indicator,'') AS z_pending_cancellation_indicator,
+IFNULL(x.deliverer_member_id,'')AS x_deliverer_member_id,
+IFNULL(y.deliverer_member_id ,'')AS y_deliverer_member_id,
+IFNULL(z.deliverer_member_id,'') AS z_deliverer_member_id,
+IFNULL(x.receiver_member_id,'')AS x_receiver_member_id,
+IFNULL(y.receiver_member_id ,'')AS y_receiver_member_id,
+IFNULL(z.receiver_member_id,'') AS z_receiver_member_id,
+IFNULL(x.receiver_account_id,'')AS x_receiver_account_id,
+IFNULL(y.receiver_account_id ,'')AS y_receiver_account_id,
+IFNULL(z.receiver_account_id,'') AS z_receiver_account_id,
+IFNULL(x.deliverer_account_id,'')AS x_deliverer_account_id,
+IFNULL(y.deliverer_account_id ,'')AS y_deliverer_account_id,
+IFNULL(z.deliverer_account_id,'') AS z_deliverer_account_id,
+IFNULL(x.sender_member_id,'')AS x_sender_member_id,
+IFNULL(y.sender_member_id ,'')AS y_sender_member_id,
+IFNULL(z.sender_member_id,'') AS z_sender_member_id,
+IFNULL(x.pdm_indicator,'')AS x_pdm_indicator,
+IFNULL(y.pdm_indicator ,'')AS y_pdm_indicator,
+IFNULL(z.pdm_indicator,'') AS z_pdm_indicator,
+IFNULL(x.erf_reference,'')AS x_erf_reference,
+IFNULL(y.erf_reference ,'')AS y_erf_reference,
+IFNULL(z.erf_reference,'') AS z_erf_reference,
+IFNULL(x.deliverer_account_no,'')AS x_deliverer_account_no,
+IFNULL(y.deliverer_account_no ,'')AS y_deliverer_account_no,
+IFNULL(z.deliverer_account_no,'') AS z_deliverer_account_no,
+IFNULL(x.receiver_account_no,'')AS x_receiver_account_no,
+IFNULL(y.receiver_account_no,'')AS y_receiver_account_no,
+IFNULL(z.receiver_account_no,'') AS z_receiver_account_no,
+IFNULL(x.msg_received_timestamp,'')AS x_msg_received_timestamp,
+IFNULL(y.msg_received_timestamp ,'')AS y_msg_received_timestamp,
+IFNULL(z.msg_received_timestamp,'') AS z_msg_received_timestamp,
+IFNULL(x.receiver_sender_id,'')AS x_receiver_sender_id,
+IFNULL(y.receiver_sender_id ,'')AS y_receiver_sender_id,
+IFNULL(z.receiver_sender_id,'') AS z_receiver_sender_id,
+IFNULL(x.deliverer_sender_id,'')AS x_deliverer_sender_id,
+IFNULL(y.deliverer_sender_id ,'')AS y_deliverer_sender_id,
+IFNULL(z.deliverer_sender_id,'') AS z_deliverer_sender_id,
+IFNULL(x.deliverer_onbehalf,'')AS x_deliverer_onbehalf,
+IFNULL(y.deliverer_onbehalf ,'')AS y_deliverer_onbehalf,
+IFNULL(z.deliverer_onbehalf,'') AS z_deliverer_onbehalf,
+IFNULL(x.receiver_onbehalf,'')AS x_receiver_onbehalf,
+IFNULL(y.receiver_onbehalf ,'')AS y_receiver_onbehalf,
+IFNULL(z.receiver_onbehalf,'') AS z_receiver_onbehalf,
+IFNULL(x.process_flag,'')AS x_process_flag,
+IFNULL(y.process_flag ,'')AS y_process_flag,
+IFNULL(z.process_flag,'') AS z_process_flag,
+IFNULL(x.deliverer_beneficiary_account,'')AS x_deliverer_beneficiary_account,
+IFNULL(y.deliverer_beneficiary_account ,'')AS y_deliverer_beneficiary_account,
+IFNULL(z.deliverer_beneficiary_account,'') AS z_deliverer_beneficiary_account,
+IFNULL(x.underlying_id,'')AS x_underlying_id,
+IFNULL(y.underlying_id ,'')AS y_underlying_id,
+IFNULL(z.underlying_id,'') AS z_underlying_id,
+IFNULL(x.balance_type,'')AS x_balance_type,
+IFNULL(y.balance_type ,'')AS y_balance_type,
+IFNULL(z.balance_type,'') AS z_balance_type,
+IFNULL(x.accured_interest_amount,'')AS x_accured_interest_amount,
+IFNULL(y.accured_interest_amount ,'')AS y_accured_interest_amount,
+IFNULL(z.accured_interest_amount,'') AS z_accured_interest_amount,
+IFNULL(x.deliverer_channel,'')AS x_deliverer_channel,
+IFNULL(y.deliverer_channel ,'')AS y_deliverer_channel,
+IFNULL(z.deliverer_channel,'') AS z_deliverer_channel,
+IFNULL(x.receiver_channel,'')AS x_receiver_channel,
+IFNULL(y.receiver_channel ,'')AS y_receiver_channel,
+IFNULL(z.receiver_channel,'') AS z_receiver_channel,
+IFNULL(x.repo_rate,'')AS x_repo_rate,
+IFNULL(y.repo_rate ,'')AS y_repo_rate,
+IFNULL(z.repo_rate,'') AS z_repo_rate,
+IFNULL(x.haircut_rate,'')AS x_haircut_rate,
+IFNULL(y.haircut_rate ,'')AS y_haircut_rate,
+IFNULL(z.haircut_rate,'') AS z_haircut_rate,
+IFNULL(x.original_account_no,'')AS x_original_account_no,
+IFNULL(y.original_account_no ,'')AS y_original_account_no,
+IFNULL(z.original_account_no,'') AS z_original_account_no,
+case when z.remarks is null then IFNULL(y.remarks ,'') else IFNULL(z.remarks ,'') end  AS y_remark
+FROM transaction_source z  left join
+transaction_temp y on z.id=y.id left join 
+transaction x on x.sss_reference=y.sss_reference AND y.remarks is null where $P!{where_clause}
+ORDER BY z.seq asc]]>
+	</queryString>
+	<field name="x_sss_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_sss_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_sss_reference"/>
+	</field>
+	<field name="y_sss_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_sss_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_sss_reference"/>
+	</field>
+	<field name="z_sss_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_sss_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_sss_reference"/>
+	</field>
+	<field name="x_message_log_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_message_log_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_message_log_id"/>
+	</field>
+	<field name="y_message_log_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_message_log_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_message_log_id"/>
+	</field>
+	<field name="z_message_log_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_message_log_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_message_log_id"/>
+	</field>
+	<field name="x_securities_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_securities_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_securities_code"/>
+	</field>
+	<field name="y_securities_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_securities_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_securities_code"/>
+	</field>
+	<field name="z_securities_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_securities_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_securities_code"/>
+	</field>
+	<field name="x_transaction_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_transaction_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_transaction_type"/>
+	</field>
+	<field name="y_transaction_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_transaction_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_transaction_type"/>
+	</field>
+	<field name="z_transaction_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_transaction_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_transaction_type"/>
+	</field>
+	<field name="x_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_status"/>
+	</field>
+	<field name="y_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_status"/>
+	</field>
+	<field name="z_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_status"/>
+	</field>
+	<field name="x_settlement_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_settlement_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_settlement_date"/>
+	</field>
+	<field name="y_settlement_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_settlement_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_settlement_date"/>
+	</field>
+	<field name="z_settlement_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_settlement_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_settlement_date"/>
+	</field>
+	<field name="x_trade_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_trade_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_trade_date"/>
+	</field>
+	<field name="y_trade_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_trade_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_trade_date"/>
+	</field>
+	<field name="z_trade_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_trade_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_trade_date"/>
+	</field>
+	<field name="x_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_currency_code"/>
+	</field>
+	<field name="y_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_currency_code"/>
+	</field>
+	<field name="z_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_currency_code"/>
+	</field>
+	<field name="x_settlement_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_settlement_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_settlement_amount"/>
+	</field>
+	<field name="y_settlement_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_settlement_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_settlement_amount"/>
+	</field>
+	<field name="z_settlement_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_settlement_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_settlement_amount"/>
+	</field>
+	<field name="x_nominal_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_nominal_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_nominal_amount"/>
+	</field>
+	<field name="y_nominal_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_nominal_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_nominal_amount"/>
+	</field>
+	<field name="z_nominal_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_nominal_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_nominal_amount"/>
+	</field>
+	<field name="x_deal_price" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deal_price"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deal_price"/>
+	</field>
+	<field name="y_deal_price" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deal_price"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deal_price"/>
+	</field>
+	<field name="z_deal_price" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deal_price"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deal_price"/>
+	</field>
+	<field name="x_deliverer_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_member_code"/>
+	</field>
+	<field name="y_deliverer_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_member_code"/>
+	</field>
+	<field name="z_deliverer_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_member_code"/>
+	</field>
+	<field name="x_receiver_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_member_code"/>
+	</field>
+	<field name="y_receiver_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_member_code"/>
+	</field>
+	<field name="z_receiver_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_member_code"/>
+	</field>
+	<field name="x_repo_closing_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_repo_closing_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_repo_closing_date"/>
+	</field>
+	<field name="y_repo_closing_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_repo_closing_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_repo_closing_date"/>
+	</field>
+	<field name="z_repo_closing_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_repo_closing_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_repo_closing_date"/>
+	</field>
+	<field name="x_repo_closing_settlement_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_repo_closing_settlement_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_repo_closing_settlement_amount"/>
+	</field>
+	<field name="y_repo_closing_settlement_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_repo_closing_settlement_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_repo_closing_settlement_amount"/>
+	</field>
+	<field name="z_repo_closing_settlement_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_repo_closing_settlement_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_repo_closing_settlement_amount"/>
+	</field>
+	<field name="x_reason_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_reason_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_reason_code"/>
+	</field>
+	<field name="y_reason_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_reason_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_reason_code"/>
+	</field>
+	<field name="z_reason_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_reason_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_reason_code"/>
+	</field>
+	<field name="x_transaction_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_transaction_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_transaction_reference"/>
+	</field>
+	<field name="y_transaction_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_transaction_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_transaction_reference"/>
+	</field>
+	<field name="z_transaction_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_transaction_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_transaction_reference"/>
+	</field>
+	<field name="x_processed_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_processed_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_processed_date"/>
+	</field>
+	<field name="y_processed_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_processed_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_processed_date"/>
+	</field>
+	<field name="z_processed_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_processed_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_processed_date"/>
+	</field>
+	<field name="x_created_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_created_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_created_date"/>
+	</field>
+	<field name="y_created_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_created_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_created_date"/>
+	</field>
+	<field name="z_created_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_created_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_created_date"/>
+	</field>
+	<field name="x_modified_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_modified_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_modified_date"/>
+	</field>
+	<field name="y_modified_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_modified_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_modified_date"/>
+	</field>
+	<field name="z_modified_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_modified_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_modified_date"/>
+	</field>
+	<field name="x_sender_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_sender_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_sender_member_swift_code"/>
+	</field>
+	<field name="y_sender_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_sender_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_sender_member_swift_code"/>
+	</field>
+	<field name="z_sender_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_sender_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_sender_member_swift_code"/>
+	</field>
+	<field name="x_payer_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_payer_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_payer_member_swift_code"/>
+	</field>
+	<field name="y_payer_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_payer_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_payer_member_swift_code"/>
+	</field>
+	<field name="z_payer_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_payer_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_payer_member_swift_code"/>
+	</field>
+	<field name="x_payee_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_payee_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_payee_member_swift_code"/>
+	</field>
+	<field name="y_payee_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_payee_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_payee_member_swift_code"/>
+	</field>
+	<field name="z_payee_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_payee_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_payee_member_swift_code"/>
+	</field>
+	<field name="x_receiver_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_member_swift_code"/>
+	</field>
+	<field name="y_receiver_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_member_swift_code"/>
+	</field>
+	<field name="z_receiver_member_swift_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_member_swift_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_member_swift_code"/>
+	</field>
+	<field name="x_sender_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_sender_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_sender_member_code"/>
+	</field>
+	<field name="y_sender_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_sender_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_sender_member_code"/>
+	</field>
+	<field name="z_sender_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_sender_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_sender_member_code"/>
+	</field>
+	<field name="x_sender_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_sender_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_sender_type"/>
+	</field>
+	<field name="y_sender_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_sender_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_sender_type"/>
+	</field>
+	<field name="z_sender_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_sender_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_sender_type"/>
+	</field>
+	<field name="x_message_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_message_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_message_type"/>
+	</field>
+	<field name="y_message_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_message_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_message_type"/>
+	</field>
+	<field name="z_message_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_message_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_message_type"/>
+	</field>
+	<field name="x_receiver_rtgs_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_rtgs_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_rtgs_account"/>
+	</field>
+	<field name="y_receiver_rtgs_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_rtgs_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_rtgs_account"/>
+	</field>
+	<field name="z_receiver_rtgs_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_rtgs_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_rtgs_account"/>
+	</field>
+	<field name="x_deliverer_rtgs_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_rtgs_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_rtgs_account"/>
+	</field>
+	<field name="y_deliverer_rtgs_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_rtgs_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_rtgs_account"/>
+	</field>
+	<field name="z_deliverer_rtgs_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_rtgs_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_rtgs_account"/>
+	</field>
+	<field name="x_receiver_rtgs_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_rtgs_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_rtgs_member_code"/>
+	</field>
+	<field name="y_receiver_rtgs_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_rtgs_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_rtgs_member_code"/>
+	</field>
+	<field name="z_receiver_rtgs_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_rtgs_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_rtgs_member_code"/>
+	</field>
+	<field name="x_deliverer_rtgs_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_rtgs_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_rtgs_member_code"/>
+	</field>
+	<field name="y_deliverer_rtgs_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_rtgs_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_rtgs_member_code"/>
+	</field>
+	<field name="z_deliverer_rtgs_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_rtgs_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_rtgs_member_code"/>
+	</field>
+	<field name="x_hold_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_hold_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_hold_indicator"/>
+	</field>
+	<field name="y_hold_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_hold_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_hold_indicator"/>
+	</field>
+	<field name="z_hold_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_hold_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_hold_indicator"/>
+	</field>
+	<field name="x_payment_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_payment_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_payment_type"/>
+	</field>
+	<field name="y_payment_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_payment_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_payment_type"/>
+	</field>
+	<field name="z_payment_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_payment_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_payment_type"/>
+	</field>
+	<field name="x_grid_lock_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_grid_lock_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_grid_lock_indicator"/>
+	</field>
+	<field name="y_grid_lock_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_grid_lock_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_grid_lock_indicator"/>
+	</field>
+	<field name="z_grid_lock_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_grid_lock_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_grid_lock_indicator"/>
+	</field>
+	<field name="x_rollover_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_rollover_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_rollover_count"/>
+	</field>
+	<field name="y_rollover_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_rollover_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_rollover_count"/>
+	</field>
+	<field name="z_rollover_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_rollover_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_rollover_count"/>
+	</field>
+	<field name="x_pending_cancellation_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_pending_cancellation_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_pending_cancellation_indicator"/>
+	</field>
+	<field name="y_pending_cancellation_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_pending_cancellation_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_pending_cancellation_indicator"/>
+	</field>
+	<field name="z_pending_cancellation_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_pending_cancellation_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_pending_cancellation_indicator"/>
+	</field>
+	<field name="x_deliverer_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_member_id"/>
+	</field>
+	<field name="y_deliverer_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_member_id"/>
+	</field>
+	<field name="z_deliverer_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_member_id"/>
+	</field>
+	<field name="x_receiver_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_member_id"/>
+	</field>
+	<field name="y_receiver_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_member_id"/>
+	</field>
+	<field name="z_receiver_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_member_id"/>
+	</field>
+	<field name="x_receiver_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_account_id"/>
+	</field>
+	<field name="y_receiver_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_account_id"/>
+	</field>
+	<field name="z_receiver_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_account_id"/>
+	</field>
+	<field name="x_deliverer_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_account_id"/>
+	</field>
+	<field name="y_deliverer_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_account_id"/>
+	</field>
+	<field name="z_deliverer_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_account_id"/>
+	</field>
+	<field name="x_sender_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_sender_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_sender_member_id"/>
+	</field>
+	<field name="y_sender_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_sender_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_sender_member_id"/>
+	</field>
+	<field name="z_sender_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_sender_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_sender_member_id"/>
+	</field>
+	<field name="x_pdm_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_pdm_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_pdm_indicator"/>
+	</field>
+	<field name="y_pdm_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_pdm_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_pdm_indicator"/>
+	</field>
+	<field name="z_pdm_indicator" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_pdm_indicator"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_pdm_indicator"/>
+	</field>
+	<field name="x_erf_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_erf_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_erf_reference"/>
+	</field>
+	<field name="y_erf_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_erf_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_erf_reference"/>
+	</field>
+	<field name="z_erf_reference" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_erf_reference"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_erf_reference"/>
+	</field>
+	<field name="x_deliverer_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_account_no"/>
+	</field>
+	<field name="y_deliverer_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_account_no"/>
+	</field>
+	<field name="z_deliverer_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_account_no"/>
+	</field>
+	<field name="x_receiver_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_account_no"/>
+	</field>
+	<field name="y_receiver_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_account_no"/>
+	</field>
+	<field name="z_receiver_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_account_no"/>
+	</field>
+	<field name="x_msg_received_timestamp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_msg_received_timestamp"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_msg_received_timestamp"/>
+	</field>
+	<field name="y_msg_received_timestamp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_msg_received_timestamp"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_msg_received_timestamp"/>
+	</field>
+	<field name="z_msg_received_timestamp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_msg_received_timestamp"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_msg_received_timestamp"/>
+	</field>
+	<field name="x_receiver_sender_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_sender_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_sender_id"/>
+	</field>
+	<field name="y_receiver_sender_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_sender_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_sender_id"/>
+	</field>
+	<field name="z_receiver_sender_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_sender_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_sender_id"/>
+	</field>
+	<field name="x_deliverer_sender_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_sender_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_sender_id"/>
+	</field>
+	<field name="y_deliverer_sender_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_sender_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_sender_id"/>
+	</field>
+	<field name="z_deliverer_sender_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_sender_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_sender_id"/>
+	</field>
+	<field name="x_deliverer_onbehalf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_onbehalf"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_onbehalf"/>
+	</field>
+	<field name="y_deliverer_onbehalf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_onbehalf"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_onbehalf"/>
+	</field>
+	<field name="z_deliverer_onbehalf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_onbehalf"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_onbehalf"/>
+	</field>
+	<field name="x_receiver_onbehalf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_onbehalf"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_onbehalf"/>
+	</field>
+	<field name="y_receiver_onbehalf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_onbehalf"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_onbehalf"/>
+	</field>
+	<field name="z_receiver_onbehalf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_onbehalf"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_onbehalf"/>
+	</field>
+	<field name="x_process_flag" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_process_flag"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_process_flag"/>
+	</field>
+	<field name="y_process_flag" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_process_flag"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_process_flag"/>
+	</field>
+	<field name="z_process_flag" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_process_flag"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_process_flag"/>
+	</field>
+	<field name="x_deliverer_beneficiary_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_beneficiary_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_beneficiary_account"/>
+	</field>
+	<field name="y_deliverer_beneficiary_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_beneficiary_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_beneficiary_account"/>
+	</field>
+	<field name="z_deliverer_beneficiary_account" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_beneficiary_account"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_beneficiary_account"/>
+	</field>
+	<field name="x_underlying_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_underlying_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_underlying_id"/>
+	</field>
+	<field name="y_underlying_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_underlying_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_underlying_id"/>
+	</field>
+	<field name="z_underlying_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_underlying_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_underlying_id"/>
+	</field>
+	<field name="x_balance_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_balance_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_balance_type"/>
+	</field>
+	<field name="y_balance_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_balance_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_balance_type"/>
+	</field>
+	<field name="z_balance_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_balance_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_balance_type"/>
+	</field>
+	<field name="x_accured_interest_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_accured_interest_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_accured_interest_amount"/>
+	</field>
+	<field name="y_accured_interest_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_accured_interest_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_accured_interest_amount"/>
+	</field>
+	<field name="z_accured_interest_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_accured_interest_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_accured_interest_amount"/>
+	</field>
+	<field name="x_deliverer_channel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_deliverer_channel"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_deliverer_channel"/>
+	</field>
+	<field name="y_deliverer_channel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_deliverer_channel"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_deliverer_channel"/>
+	</field>
+	<field name="z_deliverer_channel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_deliverer_channel"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_deliverer_channel"/>
+	</field>
+	<field name="x_receiver_channel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_receiver_channel"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_receiver_channel"/>
+	</field>
+	<field name="y_receiver_channel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_receiver_channel"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_receiver_channel"/>
+	</field>
+	<field name="z_receiver_channel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_receiver_channel"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_receiver_channel"/>
+	</field>
+	<field name="x_repo_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_repo_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_repo_rate"/>
+	</field>
+	<field name="y_repo_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_repo_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_repo_rate"/>
+	</field>
+	<field name="z_repo_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_repo_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_repo_rate"/>
+	</field>
+	<field name="x_haircut_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_haircut_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_haircut_rate"/>
+	</field>
+	<field name="y_haircut_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_haircut_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_haircut_rate"/>
+	</field>
+	<field name="z_haircut_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_haircut_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_haircut_rate"/>
+	</field>
+	<field name="x_original_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="x_original_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="x_original_account_no"/>
+	</field>
+	<field name="y_original_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_original_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_original_account_no"/>
+	</field>
+	<field name="z_original_account_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_original_account_no"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_original_account_no"/>
+	</field>
+	<field name="y_remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="y_remark"/>
+		<property name="com.jaspersoft.studio.field.label" value="y_remark"/>
+	</field>
+	<variable name="msc_count" class="java.util.concurrent.atomic.AtomicInteger" calculation="System">
+		<initialValueExpression><![CDATA[new java.util.concurrent.atomic.AtomicInteger(1)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="191" y="0" width="198" height="16" uuid="d3af13ed-2978-4772-8362-527f947f6bc8"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="470" y="0" width="100" height="16" uuid="256e3f86-d734-43ef-b6cf-7ac8f3a53bfc"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="180" height="15" uuid="ce1bbec6-8b3e-4476-bf89-207374d68e68"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<"+$P{reportID}+">"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="250" y="-1" width="80" height="13" uuid="32cc1e65-f2e2-4dc3-8e9f-ee11ec3b243c"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCRIPS SSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="12" width="259" height="18" uuid="78cb9436-f029-4c5e-878a-378da133306c"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA MIGRATION REPO CLOSING TRANSACTION REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="390" y="12" width="102" height="18" uuid="12d6f6bf-0107-4107-b48b-4dbb9c34f47e"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="-1" width="60" height="13" uuid="b1ca7787-f4d3-4d28-87f2-0f5e325f68c8"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="-1" width="50" height="13" uuid="fbffd7d3-ec79-4cca-bf41-b8f470ed8fc4"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="0" y="1" width="545" height="40" uuid="91c78071-7290-4978-8870-de7740a09c42"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Dataset1" uuid="31bf0d59-d05d-48b1-a46d-b04d95045b25">
+						<datasetParameter name="Idate">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="40" width="545">
+						<staticText>
+							<reportElement x="0" y="0" width="80" height="12" uuid="99b91ba5-9af2-42ac-93ea-85629d35d880"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[DETAILS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="440" y="0" width="60" height="12" uuid="9a5b68c5-3105-4642-8df8-a0ed8fb38409"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Source]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="12" width="180" height="12" uuid="f8b5de02-3037-41b7-a72e-1acf955e44ef"/>
+							<textElement textAlignment="Left" markup="styled">
+								<font fontName="SansSerif" size="8" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[Repo Closing TransactionTable - SCRIPS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="24" width="160" height="13" uuid="93de24f0-f72d-44c1-8ec4-da46f4ead14e"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Total Transaction migrated to SCRIPS ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="180" y="24" width="50" height="14" uuid="7f9e570e-3b2f-42af-897c-979cb4d9ba8f"/>
+							<textFieldExpression><![CDATA[$F{count(sss_reference)}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="160" y="0" width="100" height="12" uuid="c6909db4-213a-4b69-b78e-b9599153eb08"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="290" y="0" width="110" height="12" uuid="85c1262f-cad2-4a4e-8120-83e09adedd36"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Original Values]]></text>
+						</staticText>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="596" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="140" height="17" uuid="1f276b1e-933a-41a4-ad6d-a3300204386f"/>
+				<textElement>
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Migrated Transaction Code : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="0" width="20" height="17" uuid="57ac365f-3898-4da1-865a-90026a0e98fc"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="57" width="100" height="14" uuid="8b6f602d-ce59-4177-9b10-0f4d0fc09851"/>
+				<text><![CDATA[Securities Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="84" width="99" height="14" uuid="23345e0f-7265-4383-95c8-e251bc5f0bdb"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="71" width="100" height="13" uuid="024bae50-c934-4c50-941f-5e13c9dd3fd7"/>
+				<text><![CDATA[Transaction Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="98" width="100" height="13" uuid="f3966476-6f8d-4e4f-8544-d8e6a8f62c24"/>
+				<text><![CDATA[Settlement Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="124" width="100" height="13" uuid="7280307e-e744-4c55-a707-766ee4ea53e4"/>
+				<text><![CDATA[Currency Code]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="44" width="100" height="14" uuid="6c36800e-4a9d-4e43-a57a-ef004c11fe1a"/>
+				<textFieldExpression><![CDATA[$F{x_message_log_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="57" width="100" height="14" uuid="e36433e0-dcff-4052-85b7-6aedcd72a0d6"/>
+				<textFieldExpression><![CDATA[$F{x_securities_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="30" width="100" height="14" uuid="0b2d2ad0-0966-4f20-8032-7a343d7d0b1f"/>
+				<textFieldExpression><![CDATA[$F{x_sss_reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="71" width="100" height="13" uuid="76f3ecd2-215d-4c45-9241-b1df50c65319"/>
+				<textFieldExpression><![CDATA[$F{x_transaction_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="84" width="100" height="14" uuid="da533321-b7fd-4784-9a01-bbb540245f67"/>
+				<textFieldExpression><![CDATA[$F{x_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="98" width="100" height="13" uuid="7bed760e-e731-4478-b14f-b1cf3db98e76"/>
+				<textFieldExpression><![CDATA[$F{x_settlement_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="111" width="100" height="13" uuid="cc065526-b552-4e45-a93f-d31923ffe700"/>
+				<textFieldExpression><![CDATA[$F{x_trade_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="192" width="100" height="14" uuid="97fb60c8-0a77-4c07-a211-baf2ef79ccc9"/>
+				<text><![CDATA[Deliverer Account ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="111" width="100" height="13" uuid="5b88659e-58bb-43d0-9722-484ae120f4c6"/>
+				<text><![CDATA[Trade Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="137" width="100" height="13" uuid="982d8acd-5517-448e-8a0a-4951ed15cd5d"/>
+				<text><![CDATA[Settlement  Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="150" width="100" height="13" uuid="0215d3e6-8c0e-42d2-b16d-553b7b480c3b"/>
+				<text><![CDATA[Nominal Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="163" width="100" height="13" uuid="b5d84476-8000-41d0-9d6e-c43452708993"/>
+				<text><![CDATA[Deal Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="176" width="100" height="16" uuid="aa44e710-0b90-45b5-b130-baf4e9410762"/>
+				<text><![CDATA[Deliverer Member ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="124" width="100" height="14" uuid="7715ba5a-efb0-40af-abd0-de3b28bbd349"/>
+				<textFieldExpression><![CDATA[$F{x_currency_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="137" width="100" height="14" uuid="5b23b297-78a9-46ae-a17a-435b10ba3d28"/>
+				<textFieldExpression><![CDATA[$F{x_settlement_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="150" width="100" height="13" uuid="94f4236c-83a5-48c8-bf9f-dba2669ebd00"/>
+				<textFieldExpression><![CDATA[$F{x_nominal_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="163" width="100" height="14" uuid="48a8189f-0004-4174-94c2-c88e159f642a"/>
+				<textFieldExpression><![CDATA[$F{x_deal_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="176" width="100" height="16" uuid="beff696b-594c-4ef3-b15d-67a12f403e02"/>
+				<textFieldExpression><![CDATA[$F{x_deliverer_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="192" width="100" height="14" uuid="53142f8e-3f13-4a87-a89c-aa51f2a97e6a"/>
+				<textFieldExpression><![CDATA[$F{x_deliverer_account_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="30" width="100" height="14" uuid="01cf25bf-300a-4e7a-b00c-bfd5fd6fa6d2"/>
+				<textFieldExpression><![CDATA[$F{y_sss_reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="192" width="100" height="14" uuid="a43851a6-c0c4-46bb-aa13-885b050645a2"/>
+				<textFieldExpression><![CDATA[$F{y_deliverer_account_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="151" width="100" height="14" uuid="50c9ce87-7f17-4540-8090-fed7aea58d46"/>
+				<textFieldExpression><![CDATA[$F{y_nominal_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="163" width="100" height="14" uuid="7b3debc8-0001-47f1-96b3-150f61ef015e"/>
+				<textFieldExpression><![CDATA[$F{y_deal_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="44" width="100" height="13" uuid="63d6ff6a-fe7b-4885-8fe8-05e0bfe01956"/>
+				<textFieldExpression><![CDATA[$F{y_message_log_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="57" width="100" height="15" uuid="913ccf41-6b17-4a14-a9fe-1aa8f50fc3e6"/>
+				<textFieldExpression><![CDATA[$F{y_securities_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="71" width="100" height="14" uuid="d0765ac4-dd30-486c-a07b-2ed78ef5a82a"/>
+				<textFieldExpression><![CDATA[$F{y_transaction_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="84" width="100" height="14" uuid="dff8d6a9-d8f4-4e78-b5a4-24afccfba83b"/>
+				<textFieldExpression><![CDATA[$F{y_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="98" width="100" height="14" uuid="448ae343-454a-4812-aa38-5020ef9d3eab"/>
+				<textFieldExpression><![CDATA[$F{y_settlement_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="112" width="100" height="14" uuid="8b42302d-f3ff-4489-a704-fff885880950"/>
+				<textFieldExpression><![CDATA[$F{y_trade_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="124" width="100" height="16" uuid="36add706-2080-4c6e-8101-0918bb32185a"/>
+				<textFieldExpression><![CDATA[$F{y_currency_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="138" width="100" height="14" uuid="c64b73b6-e627-4a1a-99b1-82f14fb374f7"/>
+				<textFieldExpression><![CDATA[$F{y_settlement_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="176" width="100" height="16" uuid="63ef9280-f0b3-4cdb-b470-0799d8b730cf"/>
+				<textFieldExpression><![CDATA[$F{y_deliverer_member_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="222" width="100" height="14" uuid="c1af5ca0-d7a2-4dad-96ba-6de69ca1b790"/>
+				<text><![CDATA[Receiver Account ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="236" width="100" height="14" uuid="9d80e549-f817-4ebb-a337-6ed6d43ae57c"/>
+				<text><![CDATA[Repo Closing Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="206" width="100" height="16" uuid="ebb1cf46-69f3-4a35-95d0-0c857cd79fdc"/>
+				<text><![CDATA[Receiver Member ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="236" width="100" height="14" uuid="a77b6266-262d-4fb8-b90a-5b886fbd7a44"/>
+				<textFieldExpression><![CDATA[$F{x_repo_closing_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="222" width="100" height="14" uuid="f7c63b2f-8841-4e8b-a10a-9b5cce0f616e"/>
+				<textFieldExpression><![CDATA[$F{x_receiver_account_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="206" width="100" height="16" uuid="5b396f85-5ee8-4344-b2fc-566717205753"/>
+				<textFieldExpression><![CDATA[$F{x_receiver_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="206" width="100" height="16" uuid="808988c7-039c-47e1-bbd4-ff174bdd03c7"/>
+				<textFieldExpression><![CDATA[$F{y_receiver_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="222" width="100" height="14" uuid="0820157f-aa22-4ba8-b02e-1dc001640b78"/>
+				<textFieldExpression><![CDATA[$F{y_receiver_account_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="234" width="100" height="14" uuid="58b63ed0-ccd4-42b0-b160-f2fee9fb32b5"/>
+				<textFieldExpression><![CDATA[$F{y_repo_closing_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="264" width="100" height="14" uuid="d993201e-1104-43ea-9ab1-f9611e3e0205"/>
+				<text><![CDATA[Reason Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="250" width="151" height="14" uuid="35172133-4abf-4214-b50d-950cc3bb7ffc"/>
+				<text><![CDATA[Repo Closing Settlement Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="250" width="100" height="14" uuid="0d22eb09-a063-402e-afa8-1cd8bd4e318f"/>
+				<textFieldExpression><![CDATA[$F{x_repo_closing_settlement_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="264" width="100" height="14" uuid="9b9015f2-5e5b-4130-87e2-260c23133925"/>
+				<textFieldExpression><![CDATA[$F{x_reason_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="264" width="100" height="14" uuid="b7d309bb-a9d3-4dc1-b2e5-dbada8a128e6"/>
+				<textFieldExpression><![CDATA[$F{y_reason_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="248" width="100" height="14" uuid="06472234-9a97-440a-a24b-04467bb03276"/>
+				<textFieldExpression><![CDATA[$F{y_repo_closing_settlement_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="436" width="130" height="26" uuid="66315fd4-d1bf-4d7a-8e93-80c9780004b2"/>
+				<text><![CDATA[Deliverer Rtgs Account]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="462" width="130" height="26" uuid="a0f37f65-6bfd-4352-b5c0-31cb5b33cfdb"/>
+				<text><![CDATA[Receiver Rtgs Account]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="488" width="130" height="14" uuid="b59dba04-d0be-41cd-8e90-bdc3bfc3a685"/>
+				<text><![CDATA[Grid Lock Indicator]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="502" width="130" height="14" uuid="341f18af-c0a9-46de-add6-5f4329ec563b"/>
+				<text><![CDATA[Rollover Count]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="516" width="140" height="14" uuid="5bc1f268-4f80-4ceb-96e9-01fb7de6cc63"/>
+				<text><![CDATA[Pending Cancellation Indicator]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="558" width="130" height="32" uuid="b37bb04e-e861-4df1-a2fc-755f467b8ec7"/>
+				<text><![CDATA[Deliverer Rtgs Member Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="530" width="130" height="28" uuid="03df39a9-7621-43de-b7fb-1ca54649b6c5"/>
+				<text><![CDATA[Receiver Rtgs Member Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="582" width="130" height="14" uuid="3198a047-9ce9-4c6b-a923-23df38d841cb"/>
+				<text><![CDATA[Payment Type]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="434" width="100" height="27" uuid="927498b9-e72d-4cdb-bf5c-7f307705580d"/>
+				<textFieldExpression><![CDATA[$F{x_deliverer_rtgs_account}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="461" width="100" height="27" uuid="44cde6f1-4411-4ec3-af10-284fb22d3408"/>
+				<textFieldExpression><![CDATA[$F{x_receiver_rtgs_account}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="488" width="100" height="14" uuid="6c502310-5b30-4a4d-b1a8-9f7d4ab9777b"/>
+				<textFieldExpression><![CDATA[$F{x_grid_lock_indicator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="502" width="100" height="14" uuid="d3b81a90-c5d3-478e-8779-6bffc22c562e"/>
+				<textFieldExpression><![CDATA[$F{x_rollover_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="516" width="100" height="14" uuid="4bc1c619-ddd6-41f8-a6cc-a6fa2d1044ef"/>
+				<textFieldExpression><![CDATA[$F{x_pending_cancellation_indicator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="530" width="100" height="28" uuid="84ced505-82f4-4257-97b2-324cf2eb6ec2"/>
+				<textFieldExpression><![CDATA[$F{x_receiver_rtgs_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="558" width="100" height="32" uuid="5731e833-87ce-4c26-b3b6-ca37685fced8"/>
+				<textFieldExpression><![CDATA[$F{x_deliverer_rtgs_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="582" width="100" height="14" uuid="059278eb-3221-40d9-80a0-9b589e936585"/>
+				<textFieldExpression><![CDATA[$F{x_payment_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="433" width="100" height="26" uuid="b8bbd5c7-3b42-4cdd-aa76-df181ffa3653"/>
+				<textFieldExpression><![CDATA[$F{y_deliverer_rtgs_account}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="461" width="100" height="26" uuid="89bdcf89-9837-432b-b45f-9dfd1bfd3de6"/>
+				<textFieldExpression><![CDATA[$F{y_receiver_rtgs_account}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="488" width="100" height="14" uuid="76a1d558-f54e-453f-a820-f2f247f427c2"/>
+				<textFieldExpression><![CDATA[$F{y_grid_lock_indicator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="502" width="100" height="14" uuid="e821d84a-6703-401a-ac37-72f11ef1a8df"/>
+				<textFieldExpression><![CDATA[$F{y_rollover_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="516" width="100" height="14" uuid="a9946203-98a1-426b-9e41-73d299b8ddf0"/>
+				<textFieldExpression><![CDATA[$F{z_pending_cancellation_indicator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="530" width="100" height="30" uuid="bf753f4a-8bf4-4820-9935-18b570fa9148"/>
+				<textFieldExpression><![CDATA[$F{y_receiver_rtgs_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="558" width="100" height="26" uuid="a8a2eae5-2096-43e9-8578-1573eeb06e22"/>
+				<textFieldExpression><![CDATA[$F{y_deliverer_rtgs_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="582" width="100" height="14" uuid="1850c1f4-3e37-4347-b172-33e2dcf39610"/>
+				<textFieldExpression><![CDATA[$F{y_payment_type}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="14" uuid="4ab355ef-b19a-4736-91ef-eb4e0bda7a87"/>
+				<text><![CDATA[SSS Reference]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="44" width="100" height="13" uuid="082e6641-a44d-4577-9676-f474ed1ba7ad"/>
+				<text><![CDATA[Message Log Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="278" width="100" height="14" uuid="e24f6cb6-6156-474b-82d5-724117fdf17c"/>
+				<text><![CDATA[Processed Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="348" width="130" height="16" uuid="a6dd7535-9de9-44fa-a2d4-f1eb92ff0a10"/>
+				<text><![CDATA[Receiver Member Swift  Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="334" width="130" height="14" uuid="107ba9e4-7581-48af-b14b-7c8d8d49c298"/>
+				<text><![CDATA[Sender Member Swift Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="320" width="120" height="14" uuid="6053c5a3-1898-4b42-a8ef-3a76d71405c1"/>
+				<text><![CDATA[Transaction Reference]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="306" width="100" height="14" uuid="475b22d0-ff5b-4fce-8fcd-c2a8e756363a"/>
+				<text><![CDATA[Modified Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="292" width="100" height="14" uuid="4870212f-1cd8-4422-a5ba-f2a11c02b84b"/>
+				<text><![CDATA[Created Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="278" width="100" height="14" uuid="496724e3-88e3-4f5e-9db9-652c18c3f285"/>
+				<textFieldExpression><![CDATA[$F{x_processed_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="292" width="100" height="14" uuid="39cc0d1b-0564-41d2-abbc-cddd040f94f1"/>
+				<textFieldExpression><![CDATA[$F{x_created_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="306" width="100" height="14" uuid="eee6058c-fa99-4f86-bbcc-a4f7432ee036"/>
+				<textFieldExpression><![CDATA[$F{x_modified_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="320" width="100" height="14" uuid="255691e0-8fe6-45b7-b986-43ef5c4e5172"/>
+				<textFieldExpression><![CDATA[$F{x_transaction_reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="334" width="100" height="14" uuid="2eba5d3e-e482-4baa-a94e-c2df191cba0e"/>
+				<textFieldExpression><![CDATA[$F{x_sender_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="348" width="100" height="16" uuid="aabca6db-54ea-4661-90e1-de768901736f"/>
+				<textFieldExpression><![CDATA[$F{x_receiver_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="278" width="100" height="14" uuid="cad637c3-4e9a-49b7-bb2c-7bef07d2e8dd"/>
+				<textFieldExpression><![CDATA[$F{y_processed_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="292" width="100" height="14" uuid="9ef8dd62-29a3-4970-97c2-c03b44813f1a"/>
+				<textFieldExpression><![CDATA[$F{y_created_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="306" width="100" height="14" uuid="b1a2460f-3df5-4620-a747-24d45c2ed824"/>
+				<textFieldExpression><![CDATA[$F{y_modified_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="320" width="100" height="14" uuid="9d9b1aaa-a171-4971-908c-89ff8a8feed1"/>
+				<textFieldExpression><![CDATA[$F{y_transaction_reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="334" width="100" height="14" uuid="3055b7a2-8d20-4834-b66a-1090374f745f"/>
+				<textFieldExpression><![CDATA[$F{y_sender_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="348" width="100" height="14" uuid="75393fbd-eeb4-48e8-b8dd-155239186459"/>
+				<textFieldExpression><![CDATA[$F{y_receiver_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="365" width="130" height="14" uuid="3e5b4a5b-15e8-4d6e-a8ec-e5bb98f18e6d"/>
+				<text><![CDATA[Sender Member Code]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="364" width="100" height="14" uuid="0492e34a-d524-4823-9e31-23a8ca3e38d2"/>
+				<textFieldExpression><![CDATA[$F{x_sender_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="364" width="100" height="14" uuid="5716a870-ae57-4fc3-baa5-a06f1975107a"/>
+				<textFieldExpression><![CDATA[$F{y_sender_member_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="379" width="130" height="14" uuid="c3505e9a-c754-4186-a1bc-426d6164c948"/>
+				<text><![CDATA[Sender Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="393" width="130" height="14" uuid="a0d5d6b2-67dd-4549-a4c5-bd95d75c918e"/>
+				<text><![CDATA[Accrued Interest Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="378" width="100" height="14" uuid="08772897-3e0f-49ef-bf9a-b24b995fb871"/>
+				<textFieldExpression><![CDATA[$F{x_sender_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="393" width="100" height="14" uuid="defedad8-4a3b-4b7c-8abb-04509696eda0"/>
+				<textFieldExpression><![CDATA[$F{x_accured_interest_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="378" width="100" height="14" uuid="d9ab99c7-aebe-4b00-bd92-c0e70cc53755"/>
+				<textFieldExpression><![CDATA[$F{y_sender_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="393" width="100" height="14" uuid="cb051d92-fa26-4700-adf4-a2b32a2a85b2"/>
+				<textFieldExpression><![CDATA[$F{y_accured_interest_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="409" width="130" height="14" uuid="c769a32e-3aa6-4a9a-9a66-bd2ba41bcb39"/>
+				<text><![CDATA[Payer Swift Member Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="423" width="130" height="14" uuid="0e666962-6691-4bd3-b41f-38f7c2a5362c"/>
+				<text><![CDATA[Payee Swift Member Code]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="408" width="100" height="14" uuid="dbcc7845-a1fd-4dc5-a2a9-12b95ed88f8c"/>
+				<textFieldExpression><![CDATA[$F{x_payer_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="423" width="100" height="14" uuid="82456ce4-b614-44ff-851c-f5f1eda57dc3"/>
+				<textFieldExpression><![CDATA[$F{x_payee_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="408" width="100" height="14" uuid="7941d6bf-8aef-4a49-9572-a63da5876c46"/>
+				<textFieldExpression><![CDATA[$F{y_payer_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="423" width="100" height="14" uuid="fe1b53e6-c7a2-4375-8460-a2d4606ab127"/>
+				<textFieldExpression><![CDATA[$F{y_payee_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="30" width="100" height="14" uuid="2f238c2d-1e20-4b59-a61d-68e800d26be3"/>
+				<textFieldExpression><![CDATA[$F{z_sss_reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="192" width="100" height="14" uuid="50ace7af-03e2-4f3a-bca0-27e34e81aaa7"/>
+				<textFieldExpression><![CDATA[$F{z_deliverer_account_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="151" width="100" height="14" uuid="2bf6cf5c-0d08-4ce1-a1ef-182907e324e6"/>
+				<textFieldExpression><![CDATA[$F{z_nominal_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="163" width="100" height="14" uuid="22308047-baf4-4108-a35d-faf0b2cb7e7d"/>
+				<textFieldExpression><![CDATA[$F{z_deal_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="44" width="100" height="13" uuid="ddc7a9f6-e62b-497b-9678-92c4ba5f06ab"/>
+				<textFieldExpression><![CDATA[$F{z_message_log_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="57" width="100" height="15" uuid="5db01ff6-81c6-41f8-8e85-488a11d17582"/>
+				<textFieldExpression><![CDATA[$F{z_securities_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="71" width="100" height="14" uuid="cf343304-8fd3-47db-8ba3-3f7d560300ba"/>
+				<textFieldExpression><![CDATA[$F{y_transaction_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="84" width="100" height="14" uuid="a9e3c6f5-e0d2-43f1-96a9-3195ff234aad"/>
+				<textFieldExpression><![CDATA[$F{z_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="98" width="100" height="14" uuid="a4d5c9c1-b87f-484c-ae39-d0185f000625"/>
+				<textFieldExpression><![CDATA[$F{z_settlement_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="112" width="100" height="14" uuid="81a0fdf3-b350-4ee1-b57e-a71d6609b3fb"/>
+				<textFieldExpression><![CDATA[$F{z_trade_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="124" width="100" height="16" uuid="f6e6554c-12b7-4344-9ccb-8e1e5d508917"/>
+				<textFieldExpression><![CDATA[$F{z_currency_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="138" width="100" height="14" uuid="fccf6889-815e-4821-b6b8-5405f0d5d2a4"/>
+				<textFieldExpression><![CDATA[$F{z_settlement_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="176" width="100" height="16" uuid="036fff13-a18d-4b18-b5fe-bba962d9afd5"/>
+				<textFieldExpression><![CDATA[$F{z_deliverer_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="206" width="100" height="16" uuid="71309b30-34a4-4cbb-a859-02eb54d342ff"/>
+				<textFieldExpression><![CDATA[$F{z_receiver_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="222" width="100" height="14" uuid="96592df1-9731-4ded-9d45-3bbb5408ccfe"/>
+				<textFieldExpression><![CDATA[$F{z_receiver_account_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="234" width="100" height="14" uuid="5505181e-df1c-4b52-8b3c-9efa8f76c273"/>
+				<textFieldExpression><![CDATA[$F{z_repo_closing_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="264" width="100" height="14" uuid="c5b8214b-f162-44b2-a8d5-b534440e3228"/>
+				<textFieldExpression><![CDATA[$F{z_reason_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="248" width="100" height="14" uuid="bbd58c4f-a9e4-4695-9e93-1cbfa272d898"/>
+				<textFieldExpression><![CDATA[$F{z_repo_closing_settlement_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="433" width="100" height="26" uuid="70d296e7-2912-4971-b74d-7dda41b8886f"/>
+				<textFieldExpression><![CDATA[$F{z_deliverer_rtgs_account}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="461" width="100" height="26" uuid="4e103b23-5679-42d4-b26e-fe34a7f9a5b2"/>
+				<textFieldExpression><![CDATA[$F{z_receiver_rtgs_account}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="488" width="100" height="14" uuid="1b58c9b7-0acf-4142-82b7-c3830b663d40"/>
+				<textFieldExpression><![CDATA[$F{z_grid_lock_indicator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="502" width="100" height="14" uuid="a6d7fce1-10d1-4ed5-930a-8351d906bc41"/>
+				<textFieldExpression><![CDATA[$F{z_rollover_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="516" width="100" height="14" uuid="2a714d0f-ce8c-43ba-9f0b-558df8c501ec"/>
+				<textFieldExpression><![CDATA[$F{z_pending_cancellation_indicator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="530" width="100" height="30" uuid="0c08dca1-1299-4da3-bf31-224b4ebacc03"/>
+				<textFieldExpression><![CDATA[$F{z_receiver_rtgs_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="558" width="100" height="26" uuid="c611b566-2eaa-4a37-b1ee-60c4232e8ea6"/>
+				<textFieldExpression><![CDATA[$F{z_deliverer_rtgs_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="582" width="100" height="14" uuid="c8dab055-951a-464d-8b50-2ad59ef730b1"/>
+				<textFieldExpression><![CDATA[$F{z_payment_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="278" width="100" height="14" uuid="cca02e40-bd06-49e1-86cd-c2bab754c27a"/>
+				<textFieldExpression><![CDATA[$F{z_processed_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="292" width="100" height="14" uuid="ecbe77be-6b83-4f88-8390-d1d3f3697e47"/>
+				<textFieldExpression><![CDATA[$F{z_created_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="306" width="100" height="14" uuid="1f519af1-d421-4cbd-9bde-e64479f8abef"/>
+				<textFieldExpression><![CDATA[$F{z_modified_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="320" width="100" height="14" uuid="41776fca-fb11-4560-a49c-82bab073f598"/>
+				<textFieldExpression><![CDATA[$F{z_transaction_reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="334" width="100" height="14" uuid="14917531-c13b-4d1e-a57a-261ec01464bf"/>
+				<textFieldExpression><![CDATA[$F{z_sender_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="348" width="100" height="14" uuid="567f259f-1492-4ac4-aae4-540db40cdfb7"/>
+				<textFieldExpression><![CDATA[$F{z_receiver_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="364" width="100" height="14" uuid="fb4d2fb2-b979-41fc-aeab-4edeec59ba8c"/>
+				<textFieldExpression><![CDATA[$F{z_sender_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="378" width="100" height="14" uuid="dc4046c4-8c20-40f7-b46d-aea3093c0e05"/>
+				<textFieldExpression><![CDATA[$F{z_sender_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="393" width="100" height="14" uuid="829f8686-b4e7-4d9b-a6b7-dd9bae5fda77"/>
+				<textFieldExpression><![CDATA[$F{z_accured_interest_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="408" width="100" height="14" uuid="20bec1a8-6a74-47c6-9ae8-911aafb0fbeb"/>
+				<textFieldExpression><![CDATA[$F{z_payer_member_swift_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="423" width="100" height="14" uuid="1a1368b3-0048-4ca8-bfdf-56e4a9ba7d97"/>
+				<textFieldExpression><![CDATA[$F{z_payee_member_swift_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="48">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="200" y="22" width="140" height="18" uuid="b61168ab-245f-49fb-a350-3b0e6aeaf395"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[*** END OF REPORT ***]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

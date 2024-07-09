@@ -1,0 +1,1 @@
+./GenerateReport.sh report pdf SSS_SECURITIES_POSITION_STATS_DETAIL_REPORT 

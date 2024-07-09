@@ -1,0 +1,1 @@
+./DataMigration.sh CBM_FLOATING_RATE_FILE_UPLOAD

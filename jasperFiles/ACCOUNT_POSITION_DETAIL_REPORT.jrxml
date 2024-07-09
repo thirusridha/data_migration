@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LISTRND" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="054ed6c1-1cbf-4f61-af7d-7aec929f904d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="rtgs"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="418"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="575"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="726"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="260"/>
+	<subDataset name="Parent" uuid="57538305-5e66-4221-b2c2-317a81a939f7">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Data_Migration"/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="751"/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="235"/>
+		<parameter name="iDate1" class="java.lang.String"/>
+		<parameter name="mCode" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="TotalCountSet" uuid="f9a7b886-44ba-4c08-a12c-974aa3cf50a9">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<parameter name="Idate" class="java.lang.String"/>
+		<parameter name="where_clause2" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{Idate}==null  || $P{Idate}.trim().isEmpty() ? "1=1": " Date(created_date) ='"+ $P{Idate}+"'"]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[select count(account_id) from account_position where  $P!{where_clause2}]]>
+		</queryString>
+		<field name="count(account_id)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(member_code)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(member_code)"/>
+		</field>
+	</subDataset>
+	<parameter name="iDate" class="java.lang.String"/>
+	<parameter name="reportID" class="java.lang.String"/>
+	<parameter name="where_clause" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{iDate}==null  || $P{iDate}.trim().isEmpty() ? "1=1": " Date(z.migrated_date) ='"+ $P{iDate}+"'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+IFNULL(s.member_id,'')AS s_member_id,
+IFNULL(t.member_id ,'')AS t_member_id,
+IFNULL(z.member_id,'') AS z_member_id,
+IFNULL(s.account_id,'') AS s_account_id,
+IFNULL(t.account_id ,'')AS t_account_id,
+IFNULL(z.account_id ,'')AS z_account_id,
+IFNULL(s.currency_code ,'')AS s_currency_code,
+IFNULL(t.currency_code ,'')AS t_currency_code,
+IFNULL(z.currency_code ,'')AS z_currency_code,
+IFNULL(s.opening_account_balance ,'')AS s_opening_account_balance,
+IFNULL(t.opening_account_balance ,'')AS t_opening_account_balance,
+IFNULL(z.opening_account_balance ,'')AS z_opening_account_balance,
+IFNULL(s.current_account_balance ,'')AS s_current_account_balance,
+IFNULL(t.current_account_balance ,'')AS t_current_account_balance,
+IFNULL(z.current_account_balance ,'')AS z_current_account_balance,
+IFNULL(s.available_balance ,'')AS s_available_balance,
+IFNULL(t.available_balance ,'')AS t_available_balance,
+IFNULL(z.available_balance ,'')AS z_available_balance,
+IFNULL(s.member_id ,'')AS s_member_id,
+IFNULL(t.member_id ,'')AS t_member_id,
+IFNULL(z.member_id ,'')AS z_member_id,
+IFNULL(s.queue_count ,'')AS s_queue_count,
+IFNULL(t.queue_count ,'')AS t_queue_count,
+IFNULL(z.queue_count ,'')AS z_queue_count,
+IFNULL(s.queue_amount ,'')AS s_queue_amount,
+IFNULL(t.queue_amount ,'')AS t_queue_amount,
+IFNULL(z.queue_amount ,'')AS z_queue_amount,
+IFNULL(s.settled_payments_count ,'')AS s_settled_payments_count,
+IFNULL(t.settled_payments_count ,'')AS t_settled_payments_count,
+IFNULL(z.settled_payments_count ,'')AS z_settled_payments_count,
+IFNULL(s.settled_payments_amount ,'')AS s_settled_payments_amount,
+IFNULL(t.settled_payments_amount ,'')AS t_settled_payments_amount,
+IFNULL(z.settled_payments_amount ,'')AS z_settled_payments_amount,
+IFNULL(s.settled_receipts_count ,'')AS s_settled_receipts_count,
+IFNULL(t.settled_receipts_count ,'')AS t_settled_receipts_count,
+IFNULL(z.settled_receipts_count ,'')AS z_settled_receipts_count,
+IFNULL(s.settled_receipts_amount ,'')AS s_settled_receipts_amount,
+IFNULL(t.settled_receipts_amount ,'')AS t_settled_receipts_amount,
+IFNULL(z.settled_receipts_amount ,'')AS z_settled_receipts_amount,
+IFNULL(s.created_date ,'')AS s_created_date,
+IFNULL(t.created_date ,'')AS t_created_date,
+IFNULL(z.created_date ,'')AS z_created_date,
+IFNULL(s.modified_date ,'')AS s_modified_date,
+IFNULL(t.modified_date ,'')AS t_modified_date,
+IFNULL(z.modified_date ,'')AS z_modified_date,
+case when z.remarks is null then IFNULL(t.remarks ,'') else IFNULL(z.remarks ,'') end  AS t_remark
+FROM account_position_source z  left join
+account_position_temp t on z.id=t.id left join
+account_position s on z.account_id=s.account_id AND t.remarks is null where $P!{where_clause}
+ORDER BY z.seq asc]]>
+	</queryString>
+	<field name="s_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_member_id"/>
+	</field>
+	<field name="t_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_member_id"/>
+	</field>
+	<field name="z_member_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_member_id"/>
+	</field>
+	<field name="s_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_account_id"/>
+	</field>
+	<field name="t_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_account_id"/>
+	</field>
+	<field name="z_account_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_account_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_account_id"/>
+	</field>
+	<field name="s_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_currency_code"/>
+	</field>
+	<field name="t_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_currency_code"/>
+	</field>
+	<field name="z_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_currency_code"/>
+	</field>
+	<field name="s_opening_account_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_opening_account_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_opening_account_balance"/>
+	</field>
+	<field name="t_opening_account_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_opening_account_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_opening_account_balance"/>
+	</field>
+	<field name="z_opening_account_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_opening_account_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_opening_account_balance"/>
+	</field>
+	<field name="s_current_account_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_current_account_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_current_account_balance"/>
+	</field>
+	<field name="t_current_account_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_current_account_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_current_account_balance"/>
+	</field>
+	<field name="z_current_account_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_current_account_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_current_account_balance"/>
+	</field>
+	<field name="s_available_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_available_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_available_balance"/>
+	</field>
+	<field name="t_available_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_available_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_available_balance"/>
+	</field>
+	<field name="z_available_balance" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_available_balance"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_available_balance"/>
+	</field>
+	<field name="COLUMN_19" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_member_id"/>
+	</field>
+	<field name="COLUMN_20" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_member_id"/>
+	</field>
+	<field name="COLUMN_21" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_member_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_member_id"/>
+	</field>
+	<field name="s_queue_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_queue_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_queue_count"/>
+	</field>
+	<field name="t_queue_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_queue_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_queue_count"/>
+	</field>
+	<field name="z_queue_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_queue_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_queue_count"/>
+	</field>
+	<field name="s_queue_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_queue_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_queue_amount"/>
+	</field>
+	<field name="t_queue_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_queue_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_queue_amount"/>
+	</field>
+	<field name="z_queue_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_queue_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_queue_amount"/>
+	</field>
+	<field name="s_settled_payments_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_settled_payments_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_settled_payments_count"/>
+	</field>
+	<field name="t_settled_payments_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_settled_payments_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_settled_payments_count"/>
+	</field>
+	<field name="z_settled_payments_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_settled_payments_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_settled_payments_count"/>
+	</field>
+	<field name="s_settled_payments_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_settled_payments_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_settled_payments_amount"/>
+	</field>
+	<field name="t_settled_payments_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_settled_payments_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_settled_payments_amount"/>
+	</field>
+	<field name="z_settled_payments_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_settled_payments_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_settled_payments_amount"/>
+	</field>
+	<field name="s_settled_receipts_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_settled_receipts_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_settled_receipts_count"/>
+	</field>
+	<field name="t_settled_receipts_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_settled_receipts_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_settled_receipts_count"/>
+	</field>
+	<field name="z_settled_receipts_count" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_settled_receipts_count"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_settled_receipts_count"/>
+	</field>
+	<field name="s_settled_receipts_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_settled_receipts_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_settled_receipts_amount"/>
+	</field>
+	<field name="t_settled_receipts_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_settled_receipts_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_settled_receipts_amount"/>
+	</field>
+	<field name="z_settled_receipts_amount" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_settled_receipts_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_settled_receipts_amount"/>
+	</field>
+	<field name="s_created_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_created_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_created_date"/>
+	</field>
+	<field name="t_created_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_created_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_created_date"/>
+	</field>
+	<field name="z_created_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_created_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_created_date"/>
+	</field>
+	<field name="s_modified_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="s_modified_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="s_modified_date"/>
+	</field>
+	<field name="t_modified_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_modified_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_modified_date"/>
+	</field>
+	<field name="z_modified_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="z_modified_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="z_modified_date"/>
+	</field>
+	<field name="t_remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="t_remark"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_remark"/>
+	</field>
+	<variable name="msc_count" class="java.util.concurrent.atomic.AtomicInteger" calculation="System">
+		<initialValueExpression><![CDATA[new java.util.concurrent.atomic.AtomicInteger(1)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="0" width="200" height="20" uuid="fb836efc-0a14-425f-862c-efe9facda7e4"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="468" y="0" width="105" height="20" uuid="2988a300-52f8-48ff-bec1-133790d77aff"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="180" height="18" uuid="2f5c3ba3-e72b-47a1-b187-c853caaa8796"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<"+$P{reportID}+">"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="245" y="0" width="80" height="20" uuid="969dfc4a-8164-4607-9fcc-9a4af159b878"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCRIPS RTGS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="20" width="246" height="20" uuid="9d827b86-c2e1-4435-a493-0045dfbcb3f3"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA MIGRATION ACCOUNT POSITION DETAIL REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="368" y="20" width="100" height="20" uuid="6932d4c4-c259-4c40-b111-950d30b4dc74"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="70" height="20" uuid="940ea28c-38dd-46ff-ab96-336e69b33515"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="0" width="51" height="20" uuid="084ebf32-2ddc-4653-8dd7-7279b4e47bf5"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="66" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="0" y="0" width="565" height="50" uuid="f78632e3-cc08-49c8-b631-f8821b6e2710"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="TotalCountSet" uuid="322a78be-2a5a-45c3-a7d1-7d051262bc95">
+						<datasetParameter name="Idate">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="565">
+						<staticText>
+							<reportElement x="0" y="0" width="81" height="18" uuid="1170e4d8-a717-47ca-825a-a1783028703b"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[DETAILS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="180" y="0" width="110" height="18" uuid="d56f1fae-824a-4507-91bc-0eb3e9d22302"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="290" y="0" width="100" height="18" uuid="42e70eae-1bf7-4db1-9428-925d21dbbd7a"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Original Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="390" y="0" width="81" height="18" uuid="94e4ab4d-2a5f-4c3c-816c-9d947a340f2e"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Source]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="18" width="160" height="19" uuid="a6ef51f9-4616-44a6-8c8b-876d3ef5ea35"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Account Position Table - SCRIPS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="37" width="160" height="13" uuid="41247f71-b42f-463d-ab0e-b319e539edb3"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Total Account Positions migrated to SCRIPS ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="180" y="37" width="91" height="13" uuid="ffcfce47-5223-46c1-b521-ba03010ea3bb"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{count(account_id)}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="430" splitType="Prevent">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="bf660372-289c-46d3-84e0-846f6ab60fed"/>
+				<textElement>
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Migrated Account Position]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="111" y="0" width="90" height="17" uuid="f62e6b35-97d7-4ebf-aeba-f9502f6e6c9d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_remark}.equals( "" ) ?  $V{msc_count}.getAndIncrement():"NA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="100" height="22" uuid="1d453379-16b5-4087-8790-85edc596fd1e"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="90" width="100" height="16" uuid="30c4b623-013c-43f1-b785-bf8de890cf94">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_current_account_balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="106" width="100" height="16" uuid="24e256b7-d21a-48b1-8e75-0646e44a4a6a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_available_balance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="58" width="79" height="16" uuid="cdf5cdda-d909-4fd0-ae62-2d721973d85d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Currency Code]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="42" width="100" height="16" uuid="ae383c43-97b5-402f-99d2-d346e5a67687">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_account_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="74" width="79" height="16" uuid="b58dc844-12c0-4190-a61a-45f3d65c6741"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Opening Balance]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="74" width="100" height="16" uuid="aca0cb71-fd2c-405d-8d93-1a6454fa1a39">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_opening_account_balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="300" width="490" height="35" uuid="a02b3941-54ee-4d64-a4a8-4c71a54c66d2"/>
+				<textFieldExpression><![CDATA[$F{t_remark}.equals("")?"Record successfully migrated":"Invalid fields : "+$F{t_remark}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="58" width="100" height="16" uuid="ec803b20-f035-4ce1-b95c-d17d2c11527f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_currency_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="58" width="100" height="16" uuid="eb9bbbd6-4f6a-4204-bff8-68c4b4e04d50">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_currency_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="90" width="100" height="16" uuid="726aca15-09e1-4885-89e8-cd019687c02a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_current_account_balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="42" width="100" height="16" uuid="a8946ece-9e44-4e67-9510-faa8fcaf84b9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_account_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="74" width="100" height="16" uuid="4d6530f7-88ed-4127-a161-c6631f03fb93">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_opening_account_balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="58" width="100" height="16" uuid="1b3fd6ca-375e-43ea-a80d-f6b806d47582">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_currency_code}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="79" height="22" uuid="50df078c-ba94-4427-ac00-2606b9e18801"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Member ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="20" width="100" height="22" uuid="e164a5d7-874a-4040-9e43-2a6a7e0f448a"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="74" width="100" height="16" uuid="56b217ec-3d20-4d4c-a648-43b6a08ae5b4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_opening_account_balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="106" width="100" height="16" uuid="8083ec3f-58d7-4322-89e7-005c4acb9a9d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_available_balance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="42" width="79" height="16" uuid="3b053225-cd39-440c-af05-dd95863af3a8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Account Number]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="42" width="100" height="16" uuid="684e92b1-026b-4196-b56d-f17f97ba9ede">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_account_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="280" width="81" height="18" uuid="ac3273b1-82d3-4c33-9be1-29673ab70893"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="90" height="16" uuid="41f8dec1-94d0-4c92-8eaf-6ff7f6a64b5d"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Current/Closing Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="106" width="79" height="16" uuid="7b3691c9-a853-4db1-90c0-31a8dddd2a02">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Available Balance]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="90" width="100" height="16" uuid="4cdfc2c5-73f3-4f94-a4a2-2402140b87b5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_current_account_balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="20" width="100" height="22" uuid="7bde9255-be46-4ef2-8bbe-2879ece1648a"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_member_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="106" width="100" height="16" uuid="1cc47db6-a8b8-4528-ba3d-82d7f2ce91ee">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_available_balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="123" width="100" height="16" uuid="a57b3c27-b3a6-452f-974c-021fd8527b44">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_modified_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="124" width="100" height="16" uuid="de951942-e36f-4691-ad7c-518972a48244">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_modified_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="122" width="79" height="16" uuid="b23d9a13-2a0d-4bd4-a93d-2594c1a77971">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Modified Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="181" y="122" width="100" height="16" uuid="e4087129-7c54-41ff-a58c-fe01ee20031a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_modified_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="154" width="100" height="16" uuid="7ae6d64e-3c7c-4a9f-aa88-fe77f5ca6aa3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_queue_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="154" width="100" height="16" uuid="7bbf88e4-3d0e-4316-9b78-44c9b4f59e1a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_queue_count}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="154" width="79" height="16" uuid="20ded503-6b44-4abc-b697-fcbc21015a9e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Queue Count]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="179" y="154" width="100" height="16" uuid="5397a6fc-134c-48b6-9476-9710f41241bd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_queue_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="170" width="100" height="16" uuid="82d47d2b-6f49-4ede-9938-a37bd2f6e4ae">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_queue_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="170" width="100" height="16" uuid="31ab07e3-591c-4133-88cb-9513821f1633">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_queue_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="170" width="79" height="16" uuid="49bcd686-41d8-4a43-9619-6ae1a58a9c0b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Queue Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="170" width="100" height="16" uuid="a5f8eeea-bb08-4dac-8194-0e3956fb1008">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_queue_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="186" width="100" height="16" uuid="5a54c641-9d5f-46a2-b038-667efcd09b95">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_settled_payments_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="186" width="100" height="16" uuid="dd50346a-7d6d-4838-8703-9cfbc57068c8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_settled_payments_count}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="186" width="110" height="16" uuid="140e3b22-d4cc-48f3-b350-137d054621a0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Settled Payments Count]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="186" width="100" height="16" uuid="c1ab6e6f-9943-4c21-a4ed-37c410e8e4a5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_settled_payments_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="202" width="100" height="16" uuid="38f4d59b-571c-4a37-8789-a279613defbc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_settled_payments_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="202" width="100" height="16" uuid="a632a5b8-3bee-4852-b442-8e3c72010391">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_settled_payments_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="202" width="110" height="16" uuid="e61b5a48-f6a8-4d4b-9461-329a505ab1c2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Settled Payments Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="202" width="100" height="16" uuid="73a2c9e9-369d-43a3-a1b5-cf3ae85b8c3f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_settled_payments_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="218" width="100" height="16" uuid="0bb57ad3-b82f-4272-88d8-1cdb67b97b3d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_settled_receipts_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="218" width="100" height="16" uuid="54cbcb75-7e6d-4556-81bb-db713659a754">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_settled_receipts_count}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="218" width="139" height="16" uuid="03d40ef8-5767-4da4-876f-14c9c0f127ae">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Settled Receipts Count]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="218" width="100" height="16" uuid="6179b611-77e5-4d45-ab1b-d53247a5a1f1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_settled_receipts_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="234" width="100" height="16" uuid="25031b95-9ab1-4abe-8aa1-3aa53c9fed3b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_settled_receipts_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="234" width="100" height="16" uuid="fbaa092f-b801-488f-94a2-9a4052766814">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_settled_receipts_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="234" width="139" height="16" uuid="8fc86bee-6f21-45c3-98f0-dfd7ce7c4682">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Settled Receipts Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="234" width="100" height="16" uuid="c9aad5e8-d85b-428a-944c-9511f4286550">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_settled_receipts_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="138" width="100" height="16" uuid="b369c01a-8c9d-4ad6-ac01-383b5f064d1b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{z_created_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="138" width="100" height="16" uuid="4d311fd3-6b1d-4810-b04c-06a8684c440d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t_created_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="138" width="79" height="16" uuid="67f8c382-58cd-4825-8094-3163994a6e8a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Created Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="138" width="100" height="16" uuid="7a251cbc-53e9-4b0d-a983-5d7c580df38e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{s_created_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="35">
+			<staticText>
+				<reportElement x="180" y="9" width="140" height="26" uuid="8a0cf5f6-330d-4b15-9e6f-2734e5f39139"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[*** END OF REPORT ***]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

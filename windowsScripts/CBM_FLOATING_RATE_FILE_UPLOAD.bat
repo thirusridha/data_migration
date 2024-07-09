@@ -1,0 +1,4 @@
+@echo off
+cls
+setlocal
+DataMigration.bat CBM_FLOATING_RATE_FILE_UPLOAD

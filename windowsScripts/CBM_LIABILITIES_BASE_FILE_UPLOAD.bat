@@ -1,0 +1,4 @@
+@echo off
+cls
+setlocal
+DataMigration.bat CBM_LIABILITIES_BASE_FILE_UPLOAD

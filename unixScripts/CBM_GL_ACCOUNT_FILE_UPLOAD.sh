@@ -1,0 +1,1 @@
+./DataMigration.sh CBM_GL_ACCOUNT_FILE_UPLOAD

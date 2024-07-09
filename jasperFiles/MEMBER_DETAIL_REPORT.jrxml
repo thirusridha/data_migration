@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LISTRND" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="054ed6c1-1cbf-4f61-af7d-7aec929f904d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Parent" uuid="57538305-5e66-4221-b2c2-317a81a939f7">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<parameter name="iDate1" class="java.lang.String"/>
+		<parameter name="mcode" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT t1.member_code AS t_member_code,
+	IFNULL( t2.member_code,0) AS d_member_code,
+	t1.member_name AS t_member_name,
+	IFNULL( t2.member_name,0) AS d_member_name,
+	t1.member_short_name AS t_member_short_name,
+	IFNULL( t2.member_short_name,0) AS d_member_short_name,
+	t1.member_type AS t_member_type,
+	IFNULL( t2.member_type,0) AS d_member_type,
+	t1.member_status AS t_member_status,
+	t1.activation_date AS t_activation_date,
+	t1.swift_member AS t_swift_member,
+	t1.swift_bic AS t_swift_bic,
+	t1.location_code AS t_location_code,
+	t1.fi_group AS t_fi_group,
+	t1.fi_code AS t_fi_code,
+	t1.sector_id AS t_sector_id,
+	t1.currency_code_subscription AS t_currency_code_subscription,
+	t1.tax_rate AS t_tax_rate,
+	t1.fee_profile_id AS t_fee_profile_id,
+	t1.mcb_id AS t_mcb_id,
+	t1.intrday_mcb_requirement AS t_intrday_mcb_requirement,
+	t1.minimum_mcb_requirement AS t_minimum_mcb_requirement,
+	t1.maximum_mcb_requirement AS t_maximum_mcb_requirement,
+	t1.average_mcb_requirement AS t_average_mcb_requirement,
+	t1.uen AS t_uen,
+	t1.lei AS t_lei,
+	t1.exempted_from_billing AS t_exempted_from_billing,
+	t1.exempted_from_system_limit AS t_exempted_from_system_limit,
+	t1.currency_code AS t_currency_code,
+	t1.currency_member_code AS t_currency_member_code,
+	t1.currency_settlement_agent AS t_currency_settlement_agent,
+	IFNULL( t2.member_status,0) AS d_member_status,
+	IFNULL( t2.activation_date,0) AS d_activation_date,
+	IFNULL( t2.swift_member,0) AS d_swift_member,
+	IFNULL( t2.swift_bic,0) AS d_swift_bic,
+	IFNULL( t2.location_code,0) AS d_location_code,
+	IFNULL( t2.fi_group,0) AS d_fi_group,
+	IFNULL( t2.fi_code,0) AS d_fi_code,
+	IFNULL( t2.sector_id,0) AS d_sector_id,
+	IFNULL( t2.currency_code_subscription,0) AS d_currency_code_subscription,
+	IFNULL( t2.tax_rate,0) AS d_tax_rate,
+	IFNULL( t2.fee_profile_id,0) AS d_fee_profile_id,
+	IFNULL( t2.mcb_id,0) AS d_mcb_id,
+	IFNULL( t2.intrday_mcb_requirement,0) AS d_intrday_mcb_requirement,
+	IFNULL( t2.minimum_mcb_requirement,0) AS d_minimum_mcb_requirement,
+	IFNULL( t2.maximum_mcb_requirement,0) AS d_maximum_mcb_requirement,
+	IFNULL( t2.average_mcb_requirement,0) AS d_average_mcb_requirement,
+	IFNULL( t2.uen,0) AS d_uen,
+	IFNULL( t2.lei,0) AS d_lei,
+	IFNULL( t2.exempted_from_billing,0) AS d_exempted_from_billing,
+	IFNULL( t2.exempted_from_system_limit,0) AS d_exempted_from_system_limit,
+	IFNULL( t2.currency_code,0) AS d_currency_code,
+	IFNULL( t2.currency_member_code,0) AS d_currency_member_code,
+	IFNULL( t2.currency_settlement_agent,0) AS d_currency_settlement_agent
+FROM member_temp t1
+	join member t2 ON 
+t1.member_code=t2.member_code and t2.member_code =  $P{mcode} 
+	 AND DATE(t1.migrated_date) = $P{iDate1} 
+	 AND DATE(t2.migrated_date) = $P{iDate1} 
+ORDER BY t_member_code DESC]]>
+		</queryString>
+		<field name="t_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_code"/>
+		</field>
+		<field name="t_member_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_name"/>
+		</field>
+		<field name="t_member_short_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_short_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_short_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_short_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_short_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_short_name"/>
+		</field>
+		<field name="t_member_type" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_type"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_type"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_type" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_type"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_type"/>
+		</field>
+		<field name="t_member_status" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_status"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_status"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_activation_date" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="activation_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_activation_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_swift_member" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="swift_member"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_swift_member"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_swift_bic" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="swift_bic"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_swift_bic"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_location_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="location_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_location_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_fi_group" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="fi_group"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_fi_group"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_fi_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="fi_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_fi_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_sector_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sector_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_sector_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_code_subscription" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_code_subscription"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_code_subscription"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_tax_rate" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="tax_rate"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_tax_rate"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_fee_profile_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="fee_profile_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_fee_profile_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_mcb_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="mcb_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_mcb_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_intrday_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="intrday_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_intrday_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_minimum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="minimum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_minimum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_maximum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="maximum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_maximum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_average_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="average_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_average_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_uen" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="uen"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_uen"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_lei" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="lei"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_lei"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_exempted_from_billing" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.name" value="exempted_from_billing"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_exempted_from_billing"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_exempted_from_system_limit" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.name" value="exempted_from_system_limit"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_exempted_from_system_limit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_member_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_settlement_agent" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_settlement_agent"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_settlement_agent"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_status" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_status"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_status"/>
+		</field>
+		<field name="d_activation_date" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_activation_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_activation_date"/>
+		</field>
+		<field name="d_swift_member" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_swift_member"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_swift_member"/>
+		</field>
+		<field name="d_swift_bic" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_swift_bic"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_swift_bic"/>
+		</field>
+		<field name="d_location_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_location_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_location_code"/>
+		</field>
+		<field name="d_fi_group" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_fi_group"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_fi_group"/>
+		</field>
+		<field name="d_fi_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_fi_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_fi_code"/>
+		</field>
+		<field name="d_sector_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_sector_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_sector_id"/>
+		</field>
+		<field name="d_currency_code_subscription" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_code_subscription"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_code_subscription"/>
+		</field>
+		<field name="d_tax_rate" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_tax_rate"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_tax_rate"/>
+		</field>
+		<field name="d_fee_profile_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_fee_profile_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_fee_profile_id"/>
+		</field>
+		<field name="d_mcb_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_mcb_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_mcb_id"/>
+		</field>
+		<field name="d_intrday_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_intrday_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_intrday_mcb_requirement"/>
+		</field>
+		<field name="d_minimum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_minimum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_minimum_mcb_requirement"/>
+		</field>
+		<field name="d_maximum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_maximum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_maximum_mcb_requirement"/>
+		</field>
+		<field name="d_average_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_average_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_average_mcb_requirement"/>
+		</field>
+		<field name="d_uen" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_uen"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_uen"/>
+		</field>
+		<field name="d_lei" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_lei"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_lei"/>
+		</field>
+		<field name="d_exempted_from_billing" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="d_exempted_from_billing"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_exempted_from_billing"/>
+		</field>
+		<field name="d_exempted_from_system_limit" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="d_exempted_from_system_limit"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_exempted_from_system_limit"/>
+		</field>
+		<field name="d_currency_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_code"/>
+		</field>
+		<field name="d_currency_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_member_code"/>
+		</field>
+		<field name="d_currency_settlement_agent" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_settlement_agent"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_settlement_agent"/>
+		</field>
+		<group name="t_member_code">
+			<groupExpression><![CDATA[$F{t_member_code}]]></groupExpression>
+		</group>
+		<group name="d_member_code">
+			<groupExpression><![CDATA[$F{d_member_code}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="child" uuid="bacb9362-4f4d-4a3f-b909-0456931e1365">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<queryString language="SQL">
+			<![CDATA[select * from account where account_number in(74630101,74630102)]]>
+		</queryString>
+		<field name="account_number" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="account_number"/>
+			<property name="com.jaspersoft.studio.field.label" value="account_number"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="account"/>
+		</field>
+		<field name="account_type" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="account_type"/>
+			<property name="com.jaspersoft.studio.field.label" value="account_type"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="account"/>
+		</field>
+	</subDataset>
+	<subDataset name="TotalCountSet" uuid="f9a7b886-44ba-4c08-a12c-974aa3cf50a9">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<parameter name="Idate" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select count(member_code) from member where DATE(migrated_date)= $P{Idate}  order by member_code]]>
+		</queryString>
+		<field name="count(member_code)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(member_code)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(member_code)"/>
+		</field>
+	</subDataset>
+	<parameter name="iDate" class="java.lang.String"/>
+	<parameter name="reportID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select member_code from member where DATE(migrated_date)= $P{iDate}   order by member_code]]>
+	</queryString>
+	<field name="member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="member_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="0" width="200" height="20" uuid="fb836efc-0a14-425f-862c-efe9facda7e4"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="469" y="0" width="106" height="20" uuid="2988a300-52f8-48ff-bec1-133790d77aff"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="180" height="18" uuid="2f5c3ba3-e72b-47a1-b187-c853caaa8796"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<"+$P{reportID}+">"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="2" width="80" height="20" uuid="29a765a7-79c2-43ae-92e9-a9461f4ad44b"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCRIPS RTGS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="20" width="207" height="20" uuid="3ceadead-e5ae-46fc-b9ca-c65f2aaac709"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA MIGRATION MEMBER DETAIL REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="386" y="20" width="100" height="20" uuid="12e1f45f-3b2e-4f27-b801-6ff33d50c83a"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="70" height="20" uuid="774390ed-0bad-4c56-a763-4fab5f075699"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="0" width="51" height="20" uuid="e970f52d-6b7c-4618-a9cd-d2513b12a2f8"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="56" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="0" y="0" width="571" height="56" uuid="f78632e3-cc08-49c8-b631-f8821b6e2710"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="TotalCountSet" uuid="322a78be-2a5a-45c3-a7d1-7d051262bc95">
+						<datasetParameter name="Idate">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="56" width="571">
+						<staticText>
+							<reportElement x="0" y="0" width="81" height="18" uuid="1170e4d8-a717-47ca-825a-a1783028703b"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[DETAILS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="180" y="0" width="110" height="18" uuid="d56f1fae-824a-4507-91bc-0eb3e9d22302"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="290" y="0" width="100" height="18" uuid="42e70eae-1bf7-4db1-9428-925d21dbbd7a"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Original Values]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="390" y="0" width="81" height="18" uuid="94e4ab4d-2a5f-4c3c-816c-9d947a340f2e"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Source]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="484" y="0" width="81" height="18" uuid="d5ce8832-3aa5-497e-9fa1-108e3392e8b4"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Remarks]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="18" width="120" height="19" uuid="a6ef51f9-4616-44a6-8c8b-876d3ef5ea35"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Member Table - SCRIPS]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="37" width="160" height="13" uuid="41247f71-b42f-463d-ab0e-b319e539edb3"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Total Members migrated to SCRIPS ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="180" y="37" width="91" height="13" uuid="ffcfce47-5223-46c1-b521-ba03010ea3bb"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{count(member_code)}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="706" splitType="Prevent">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="20" uuid="cc8a779c-422f-439d-b314-e2e46f24b026">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e27836cc-52f8-44ab-baf6-e1f71034cf4d"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{member_code}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement stretchType="ContainerHeight" x="0" y="37" width="564" height="640" uuid="5dc29a32-a865-4519-b841-1282d8f5d6d7"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Parent" uuid="836555af-5f75-47c9-83dc-6d1cac86c0d8">
+						<datasetParameter name="iDate1">
+							<datasetParameterExpression><![CDATA[$P{iDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="mcode">
+							<datasetParameterExpression><![CDATA[$F{member_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="640" width="564">
+						<textField>
+							<reportElement x="180" y="0" width="100" height="16" uuid="1435ee3d-60d2-453c-9742-20f6b9813661"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_member_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="290" y="0" width="100" height="14" uuid="3490e4c8-3c52-48aa-918b-5e86bda26172"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_member_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="20" width="110" height="16" uuid="7b1ac4f3-3444-4e12-9cec-c0702542d0ef"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_member_name}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="290" y="20" width="131" height="20" uuid="f2ba8ccc-91fa-41cd-8bf6-a7084032e7b8"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_member_name}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="37" width="110" height="19" uuid="05d3f36c-c3f6-4aef-93f9-bf0db7019857"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_member_short_name}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="40" width="131" height="19" uuid="bc1b7d81-1d5f-4440-9f0b-250c960ed88d"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_member_short_name}]]></textFieldExpression>
+						</textField>
+						<componentElement>
+							<reportElement x="0" y="560" width="560" height="60" uuid="ec6312f4-f262-40a2-9ce8-5f4523789431"/>
+							<jr:list printOrder="Vertical">
+								<datasetRun subDataset="child" uuid="06f2d75c-771c-4d35-afaf-12d1e6f54c68">
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+								<jr:listContents height="60" width="560">
+									<textField>
+										<reportElement x="180" y="0" width="100" height="19" uuid="ce7c4e9a-3447-42ce-a80d-aee5e59d92de"/>
+										<textElement>
+											<font fontName="SansSerif" size="8"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{account_number}]]></textFieldExpression>
+									</textField>
+									<textField>
+										<reportElement x="182" y="21" width="109" height="17" isPrintWhenDetailOverflows="true" uuid="8423a519-93ca-4000-b67a-b3795e29cc7b"/>
+										<textElement>
+											<font fontName="SansSerif" size="8"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{account_type}]]></textFieldExpression>
+									</textField>
+									<staticText>
+										<reportElement x="0" y="0" width="110" height="21" uuid="f11a4eb4-7ccf-4472-b4ad-748651ad210c"/>
+										<textElement>
+											<font fontName="SansSerif" size="8"/>
+										</textElement>
+										<text><![CDATA[Account Number]]></text>
+									</staticText>
+									<staticText>
+										<reportElement x="0" y="21" width="110" height="17" uuid="fb48a66a-4548-47ab-b7b3-1fc379af380b"/>
+										<textElement>
+											<font fontName="SansSerif" size="8"/>
+										</textElement>
+										<text><![CDATA[Account Type]]></text>
+									</staticText>
+								</jr:listContents>
+							</jr:list>
+						</componentElement>
+						<textField>
+							<reportElement x="180" y="56" width="100" height="16" uuid="029a38ca-39b0-4f23-868d-88eccd1b3d34"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_member_type}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="59" width="100" height="13" uuid="f7b733b0-9820-49c0-958b-d66cfefeaa76"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_member_type}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="74" width="100" height="14" uuid="156069bb-11bc-4b00-97fc-70e0533e0584"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_member_status}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="290" y="77" width="100" height="14" uuid="82cfbf5f-d0c4-4ef8-ba49-45371cf4f706"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_member_status}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="90" width="100" height="16" uuid="c565f61e-1bab-48a4-bab1-c3dc66d0bcf9"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_activation_date}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="93" width="100" height="13" uuid="93659777-fbfd-4e5d-953e-418f6333906f"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_activation_date}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="107" width="100" height="15" uuid="a656d943-7b14-4d0b-99eb-df71dc838bbe"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_swift_member}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="110" width="100" height="15" uuid="84137057-fb6f-49bd-921b-d5e6bc761820"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_swift_member}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="124" width="100" height="14" uuid="9d69c8aa-25f9-4fde-b9f1-b05e227b2ccc"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_swift_bic}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="127" width="98" height="14" uuid="28f30046-cdfc-470d-b2cd-73bf388d5b71"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_swift_bic}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="140" width="100" height="13" uuid="c923e1ed-0148-4d99-893d-5e0323f75365"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_location_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="143" width="100" height="13" uuid="0723092c-3437-4c69-be54-a0fbf0d321cb"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_location_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="181" y="155" width="100" height="16" uuid="47fbf77e-dde1-40d2-ba4a-649e1e0e90cd"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_fi_group}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="175" width="100" height="14" uuid="0e8dc416-27a2-4ca2-86ae-b6a34edd132e"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_fi_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="180" y="189" width="100" height="16" uuid="e4d242bd-5576-4066-bbd9-6961c1e7d020"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_sector_id}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="181" y="207" width="100" height="18" uuid="fb2356e6-f6e2-4761-9e43-fbe06010d474"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_currency_code_subscription}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="227" width="100" height="16" uuid="84624776-c36e-428f-9fb0-4ae7c8474fbb"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_tax_rate}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="205" width="100" height="20" uuid="d74c707d-e7f3-4885-b79f-96b922ca9796"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_currency_code_subscription}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="227" width="100" height="16" uuid="5ada7279-a496-4faf-bc77-2ec9ba98f3aa"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_tax_rate}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="178" width="100" height="11" uuid="e23210aa-5db1-4d01-8527-5ddd78b99b7d"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_fi_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="190" width="100" height="15" uuid="8ae3f302-501b-4853-8727-47d7a1af9199"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_sector_id}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="158" width="100" height="13" uuid="41fc8b91-64ae-4608-bfe1-bd552c8cb17c"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_fi_group}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="278" width="100" height="16" uuid="f2cf098f-7645-4aba-acf6-033b12140ada"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_maximum_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="243" width="100" height="16" uuid="c483d9cb-6763-4a04-b9df-2ab55d32a59c"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_mcb_id}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="261" width="100" height="16" uuid="75fd1ecd-776e-4f9c-a186-8c045dd134f3"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_intrday_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="181" y="295" width="100" height="16" uuid="2b520a45-deb7-463a-bd04-0c062a428d85"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_minimum_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="280" width="100" height="14" uuid="26006445-59bd-4385-bbd8-543c137a7a54"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_maximum_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="243" width="100" height="16" uuid="806cf58e-b2df-430b-8a4c-54c55d70493b"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_mcb_id}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="261" width="100" height="16" uuid="66e45ffc-e2fa-4faa-b379-37392705c2e2"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_intrday_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="295" width="100" height="16" uuid="4aefad48-0edb-42fc-8404-62d3ff46d6ed"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_minimum_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="181" y="331" width="100" height="18" uuid="242b461d-0318-4c8e-a687-20ebf16e780f"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_uen}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="181" y="313" width="100" height="16" uuid="32042148-3e0c-4025-98e1-1f7b5cf20d66"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_average_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="313" width="100" height="16" uuid="ea7d71cd-c069-418c-8630-17435b07990f"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_average_mcb_requirement}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="331" width="100" height="18" uuid="a410520d-7325-41e5-8167-c0eaf325c0c6"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_uen}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="352" width="100" height="14" uuid="69ed5472-2aab-4bb8-a271-15200d76d361"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_lei}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="290" y="366" width="100" height="19" uuid="acec7e6a-7d2a-4d9c-90de-6b11a649ee1b"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_exempted_from_billing}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="386" width="100" height="20" uuid="838f54b8-fb53-4d32-a36f-437571056582"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_exempted_from_system_limit}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="387" width="100" height="20" uuid="9a031bcd-a645-408a-a90d-3d0a6dfa8601"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_exempted_from_system_limit}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="181" y="367" width="100" height="19" uuid="d0964ed9-5430-48d9-9979-3ab9f48ad9d3"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_exempted_from_billing}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="351" width="100" height="14" uuid="fca1572c-0aa2-4718-85b8-c19e66da5f89"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_lei}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="407" width="100" height="13" uuid="e5b0123f-d351-4a65-973d-88efd64e9b15"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_currency_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="181" y="448" width="100" height="20" uuid="4215fea0-bd39-4f38-a49a-6d95411a6ed6"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_currency_settlement_agent}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="182" y="421" width="100" height="26" uuid="e545a2d2-c8b4-4072-999e-6b59f81f767e"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{t_currency_member_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="290" y="408" width="100" height="13" uuid="cf33e6e9-8b6d-45e3-8f04-25923c4e1aac"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_currency_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="421" width="100" height="27" uuid="bef72105-edb7-4f88-aad5-d728dc29df36"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_currency_member_code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="289" y="449" width="100" height="20" uuid="ab61cb8a-5e97-4654-b96d-a274715432c7"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{d_currency_settlement_agent}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="0" y="0" width="79" height="16" uuid="5c1546da-e476-4b6c-a29f-47266304145f"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Member Code]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="16" width="79" height="16" uuid="57291032-36b3-41e6-b99e-362c9d6900c7"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Member Name]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="32" width="140" height="24" uuid="2d2d623e-890a-4e67-a237-93ee764d6815"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Member Short Name]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="72" width="79" height="16" uuid="9b3d0f5a-50a4-4a3c-9a97-d17c9bca6dfb"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Member Status]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="56" width="79" height="16" uuid="6b0f6fca-b785-4709-9fbb-287980acdaad"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Member Type]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="122" width="79" height="16" uuid="b1429b51-e9ec-4900-98f4-a12561f537e4"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Swift BIC]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="140" width="100" height="13" uuid="72a7a054-8264-4e6b-9e66-2c85887be4dd"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Location Code]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="106" width="79" height="16" uuid="7ee0d24c-19c9-422d-a2d4-5910ad4c183e"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Swift Member]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="155" width="79" height="16" uuid="7025dc30-aae7-45ef-ba1d-c0f5012d81a6"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[FI Group]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="90" width="79" height="16" uuid="a9bcac7e-9767-4d2b-a223-2c2ec875c0d1"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Activation Date]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="205" width="140" height="20" uuid="0f96c9e2-5e09-4035-a95f-a3e2b11f0ee9"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Currency Code Subscription]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="227" width="79" height="16" uuid="38118975-85a7-461e-9aa4-656285680eeb"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[TAX Rate]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="173" width="79" height="16" uuid="eecf093f-d600-49fe-a491-ec0b4dd2f9ee"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[FI Code]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="189" width="79" height="16" uuid="312ad1b4-31ff-4c66-a444-1fd00e7083b9"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Sector ID]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="351" width="79" height="14" uuid="92491293-4027-4c64-84fa-cfc98a04f50a"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[LEI]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="331" width="79" height="18" uuid="6e0a7db4-89ad-4fee-9e71-ad667caf46c3"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[UEN]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="278" width="167" height="16" uuid="66964504-bfa1-44c1-9ad2-f7ca8b89d07c"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Maximum End-Of-Day MCB requirement(%)]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="295" width="177" height="16" uuid="e1ea44bd-9595-4173-bb48-fd7f9003b09c"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Minimum End-Of-Day MCB requirement (%)]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="261" width="147" height="16" uuid="72c964fd-3f18-4f11-939d-036b40caa20c"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Intraday MCB Requirement(%)]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="243" width="79" height="16" uuid="2253f776-773c-4898-9ef0-0676eed069b0"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[MCB ID]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="365" width="139" height="20" uuid="64168e96-649c-4500-adc8-79511c96121a"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Exempted from Billing]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="313" width="166" height="16" uuid="d0ad94ac-6ba4-42d2-96c0-d7e9c5d94dd3"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Average End-Of-Day MCB requirement(%)]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="420" width="169" height="26" uuid="58f678a5-da32-4f34-bfa4-6137fd060577"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Currency-Settlement Agent Member Code]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="404" width="139" height="16" uuid="e6eb0e98-4a1a-4090-8570-f071df3c795f"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Currency Code]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="447" width="169" height="20" uuid="1eb4d15c-86f0-4e27-b116-1621566e15da"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Currency-Account with Settlement Agent]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="386" width="139" height="19" uuid="33f20329-219e-45d8-936d-81bfc769e573"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8"/>
+							</textElement>
+							<text><![CDATA[Exempted from System Limit]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="533" width="189" height="18" uuid="c28ad662-ff99-45ef-8324-c9b70881eb79"/>
+							<textElement textAlignment="Left">
+								<font fontName="SansSerif" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Associated Accounts]]></text>
+						</staticText>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="bf660372-289c-46d3-84e0-846f6ab60fed"/>
+				<textElement>
+					<font fontName="Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Migrated member :]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="38">
+			<staticText>
+				<reportElement x="180" y="9" width="140" height="26" uuid="8a0cf5f6-330d-4b15-9e6f-2734e5f39139"/>
+				<textElement textAlignment="Left">
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[*** END OF REPORT ***]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

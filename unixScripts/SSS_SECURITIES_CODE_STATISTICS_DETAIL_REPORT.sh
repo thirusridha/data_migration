@@ -1,0 +1,1 @@
+./GenerateReport.sh report pdf SSS_SECURITIES_CODE_STATISTICS_DETAIL_REPORT  

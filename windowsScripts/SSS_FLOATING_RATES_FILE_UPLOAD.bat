@@ -1,0 +1,4 @@
+@echo off
+cls
+setlocal
+DataMigration.bat SSS_FLOATING_RATE_FILE_UPLOAD

@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_9" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91d99d63-6474-4af8-a2b4-2d8f03cc2fd0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+	<subDataset name="Dataset1" uuid="5348fde1-6907-46e3-8ada-287bc8679937">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NETSDB"/>
+		<queryString language="SQL">
+			<![CDATA[select (select count(*) from member where DATE(migrated_date)='2022-03-17') as countVal, 
+t1.member_code as t_member_code,
+IFNULL(t2.member_code,0) as d_member_code ,
+t1.member_name as t_member_name,
+IFNULL(t2.member_name,0) as d_member_name,
+t1.member_short_name as t_member_short_name,
+IFNULL(t2.member_short_name,0) as d_member_short_name,
+t1.member_type as t_member_type,
+IFNULL(t2.member_type,0) as d_member_type ,
+t1.member_status as t_member_status,
+t1.activation_date as t_activation_date,
+t1.swift_member as t_swift_member,
+t1.swift_bic as t_swift_bic,
+t1.location_code as t_location_code,
+t1.fi_group as t_fi_group,
+t1.fi_code as t_fi_code,
+t1.sector_id as t_sector_id,
+t1.currency_code_subscription as t_currency_code_subscription,
+t1.tax_rate as t_tax_rate,
+t1.fee_profile_id as t_fee_profile_id,
+t1.mcb_id as t_mcb_id,
+t1.intrday_mcb_requirement as t_intrday_mcb_requirement,
+t1.minimum_mcb_requirement as t_minimum_mcb_requirement,
+t1.maximum_mcb_requirement as t_maximum_mcb_requirement,
+t1.average_mcb_requirement as t_average_mcb_requirement,
+t1.uen as t_uen,
+t1.lei as t_lei,
+t1.exempted_from_billing as t_exempted_from_billing,
+t1.exempted_from_system_limit as t_exempted_from_system_limit,
+t1.currency_code as t_currency_code,
+t1.currency_member_code as t_currency_member_code,
+t1.currency_settlement_agent as t_currency_settlement_agent,
+IFNULL(t2.member_status,0) as d_member_status,
+IFNULL(t2.activation_date,0) as d_activation_date,
+IFNULL(t2.swift_member,0) as d_swift_member,
+IFNULL(t2.swift_bic,0) as d_swift_bic,
+IFNULL(t2.location_code,0) as d_location_code,
+IFNULL(t2.fi_group,0) as d_fi_group,
+IFNULL(t2.fi_code,0) as d_fi_code,
+IFNULL(t2.sector_id,0) as d_sector_id,
+IFNULL(t2.currency_code_subscription,0) as d_currency_code_subscription,
+IFNULL(t2.tax_rate,0) as d_tax_rate ,
+IFNULL(t2.fee_profile_id,0) as d_fee_profile_id,
+IFNULL(t2.mcb_id,0) as d_mcb_id,
+IFNULL(t2.intrday_mcb_requirement,0) as d_intrday_mcb_requirement,
+IFNULL(t2.minimum_mcb_requirement,0) as d_minimum_mcb_requirement,
+IFNULL(t2.maximum_mcb_requirement,0) as d_maximum_mcb_requirement,
+IFNULL(t2.average_mcb_requirement,0) as d_average_mcb_requirement,
+IFNULL(t2.uen,0) as d_uen,
+IFNULL(t2.lei,0) as d_lei,
+IFNULL(t2.exempted_from_billing,0) as d_exempted_from_billing,
+IFNULL(t2.exempted_from_system_limit,0) as d_exempted_from_system_limit,
+IFNULL(t2.currency_code,0) as d_currency_code,
+IFNULL(t2.currency_member_code,0) as d_currency_member_code,
+IFNULL(t2.currency_settlement_agent,0) as d_currency_settlement_agent
+from  member_temp t1  join member t2 on t1.member_code=t2.member_code 
+and DATE(t1.migrated_date)='2022-03-17' and DATE(t2.migrated_date)='2022-03-17' 
+order by t_member_code]]>
+		</queryString>
+		<field name="countVal" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="countVal"/>
+			<property name="com.jaspersoft.studio.field.label" value="countVal"/>
+		</field>
+		<field name="t_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_code"/>
+		</field>
+		<field name="t_member_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_name"/>
+		</field>
+		<field name="t_member_short_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_short_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_short_name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_short_name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_short_name"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_short_name"/>
+		</field>
+		<field name="t_member_type" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_type"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_type"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_type" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_type"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_type"/>
+		</field>
+		<field name="t_member_status" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="member_status"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_member_status"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_activation_date" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="activation_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_activation_date"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_swift_member" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="swift_member"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_swift_member"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_swift_bic" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="swift_bic"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_swift_bic"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_location_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="location_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_location_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_fi_group" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="fi_group"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_fi_group"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_fi_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="fi_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_fi_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_sector_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sector_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_sector_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_code_subscription" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_code_subscription"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_code_subscription"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_tax_rate" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="tax_rate"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_tax_rate"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_fee_profile_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="fee_profile_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_fee_profile_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_mcb_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="mcb_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_mcb_id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_intrday_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="intrday_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_intrday_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_minimum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="minimum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_minimum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_maximum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="maximum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_maximum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_average_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="average_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_average_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_uen" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="uen"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_uen"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_lei" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="lei"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_lei"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_exempted_from_billing" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.name" value="exempted_from_billing"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_exempted_from_billing"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_exempted_from_system_limit" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.name" value="exempted_from_system_limit"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_exempted_from_system_limit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_member_code"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="t_currency_settlement_agent" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="currency_settlement_agent"/>
+			<property name="com.jaspersoft.studio.field.label" value="t_currency_settlement_agent"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+		</field>
+		<field name="d_member_status" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_member_status"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_member_status"/>
+		</field>
+		<field name="d_activation_date" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_activation_date"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_activation_date"/>
+		</field>
+		<field name="d_swift_member" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_swift_member"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_swift_member"/>
+		</field>
+		<field name="d_swift_bic" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_swift_bic"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_swift_bic"/>
+		</field>
+		<field name="d_location_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_location_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_location_code"/>
+		</field>
+		<field name="d_fi_group" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_fi_group"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_fi_group"/>
+		</field>
+		<field name="d_fi_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_fi_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_fi_code"/>
+		</field>
+		<field name="d_sector_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_sector_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_sector_id"/>
+		</field>
+		<field name="d_currency_code_subscription" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_code_subscription"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_code_subscription"/>
+		</field>
+		<field name="d_tax_rate" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_tax_rate"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_tax_rate"/>
+		</field>
+		<field name="d_fee_profile_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_fee_profile_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_fee_profile_id"/>
+		</field>
+		<field name="d_mcb_id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_mcb_id"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_mcb_id"/>
+		</field>
+		<field name="d_intrday_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_intrday_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_intrday_mcb_requirement"/>
+		</field>
+		<field name="d_minimum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_minimum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_minimum_mcb_requirement"/>
+		</field>
+		<field name="d_maximum_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_maximum_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_maximum_mcb_requirement"/>
+		</field>
+		<field name="d_average_mcb_requirement" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_average_mcb_requirement"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_average_mcb_requirement"/>
+		</field>
+		<field name="d_uen" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_uen"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_uen"/>
+		</field>
+		<field name="d_lei" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_lei"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_lei"/>
+		</field>
+		<field name="d_exempted_from_billing" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="d_exempted_from_billing"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_exempted_from_billing"/>
+		</field>
+		<field name="d_exempted_from_system_limit" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="d_exempted_from_system_limit"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_exempted_from_system_limit"/>
+		</field>
+		<field name="d_currency_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_code"/>
+		</field>
+		<field name="d_currency_member_code" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_member_code"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_member_code"/>
+		</field>
+		<field name="d_currency_settlement_agent" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="d_currency_settlement_agent"/>
+			<property name="com.jaspersoft.studio.field.label" value="d_currency_settlement_agent"/>
+		</field>
+	</subDataset>
+	<parameter name="iDate" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select (select count(*) from member where DATE(migrated_date)= $P{iDate} ) as countVal, 
+t1.member_code as t_member_code,
+IFNULL(t2.member_code,0) as d_member_code ,
+t1.member_name as t_member_name,
+IFNULL(t2.member_name,0) as d_member_name,
+t1.member_short_name as t_member_short_name,
+IFNULL(t2.member_short_name,0) as d_member_short_name,
+t1.member_type as t_member_type,
+IFNULL(t2.member_type,0) as d_member_type ,
+t1.member_status as t_member_status,
+t1.activation_date as t_activation_date,
+t1.swift_member as t_swift_member,
+t1.swift_bic as t_swift_bic,
+t1.location_code as t_location_code,
+t1.fi_group as t_fi_group,
+t1.fi_code as t_fi_code,
+t1.sector_id as t_sector_id,
+t1.currency_code_subscription as t_currency_code_subscription,
+t1.tax_rate as t_tax_rate,
+t1.fee_profile_id as t_fee_profile_id,
+t1.mcb_id as t_mcb_id,
+t1.intrday_mcb_requirement as t_intrday_mcb_requirement,
+t1.minimum_mcb_requirement as t_minimum_mcb_requirement,
+t1.maximum_mcb_requirement as t_maximum_mcb_requirement,
+t1.average_mcb_requirement as t_average_mcb_requirement,
+t1.uen as t_uen,
+t1.lei as t_lei,
+t1.exempted_from_billing as t_exempted_from_billing,
+t1.exempted_from_system_limit as t_exempted_from_system_limit,
+t1.currency_code as t_currency_code,
+t1.currency_member_code as t_currency_member_code,
+t1.currency_settlement_agent as t_currency_settlement_agent,
+IFNULL(t2.member_status,0) as d_member_status,
+IFNULL(t2.activation_date,0) as d_activation_date,
+IFNULL(t2.swift_member,0) as d_swift_member,
+IFNULL(t2.swift_bic,0) as d_swift_bic,
+IFNULL(t2.location_code,0) as d_location_code,
+IFNULL(t2.fi_group,0) as d_fi_group,
+IFNULL(t2.fi_code,0) as d_fi_code,
+IFNULL(t2.sector_id,0) as d_sector_id,
+IFNULL(t2.currency_code_subscription,0) as d_currency_code_subscription,
+IFNULL(t2.tax_rate,0) as d_tax_rate ,
+IFNULL(t2.fee_profile_id,0) as d_fee_profile_id,
+IFNULL(t2.mcb_id,0) as d_mcb_id,
+IFNULL(t2.intrday_mcb_requirement,0) as d_intrday_mcb_requirement,
+IFNULL(t2.minimum_mcb_requirement,0) as d_minimum_mcb_requirement,
+IFNULL(t2.maximum_mcb_requirement,0) as d_maximum_mcb_requirement,
+IFNULL(t2.average_mcb_requirement,0) as d_average_mcb_requirement,
+IFNULL(t2.uen,0) as d_uen,
+IFNULL(t2.lei,0) as d_lei,
+IFNULL(t2.exempted_from_billing,0) as d_exempted_from_billing,
+IFNULL(t2.exempted_from_system_limit,0) as d_exempted_from_system_limit,
+IFNULL(t2.currency_code,0) as d_currency_code,
+IFNULL(t2.currency_member_code,0) as d_currency_member_code,
+IFNULL(t2.currency_settlement_agent,0) as d_currency_settlement_agent
+from  member_temp t1  join member t2 on t1.member_code=t2.member_code 
+and DATE(t1.migrated_date)= $P{iDate}  and DATE(t2.migrated_date)= $P{iDate} 
+order by t_member_code]]>
+	</queryString>
+	<field name="countVal" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="countVal"/>
+		<property name="com.jaspersoft.studio.field.label" value="countVal"/>
+	</field>
+	<field name="t_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_member_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="d_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_member_code"/>
+	</field>
+	<field name="t_member_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="member_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_member_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="d_member_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_member_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_member_name"/>
+	</field>
+	<field name="t_member_short_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="member_short_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_member_short_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="d_member_short_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_member_short_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_member_short_name"/>
+	</field>
+	<field name="t_member_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="member_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_member_type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="d_member_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_member_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_member_type"/>
+	</field>
+	<field name="t_member_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="member_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_member_status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_activation_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="activation_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_activation_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_swift_member" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="swift_member"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_swift_member"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_swift_bic" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="swift_bic"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_swift_bic"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_location_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="location_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_location_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_fi_group" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fi_group"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_fi_group"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_fi_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fi_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_fi_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_sector_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sector_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_sector_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_currency_code_subscription" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="currency_code_subscription"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_currency_code_subscription"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_tax_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tax_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_tax_rate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_fee_profile_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fee_profile_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_fee_profile_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_mcb_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="mcb_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_mcb_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_intrday_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="intrday_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_intrday_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_minimum_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="minimum_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_minimum_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_maximum_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="maximum_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_maximum_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_average_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="average_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_average_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_uen" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uen"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_uen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_lei" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="lei"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_lei"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_exempted_from_billing" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="exempted_from_billing"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_exempted_from_billing"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_exempted_from_system_limit" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="exempted_from_system_limit"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_exempted_from_system_limit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_currency_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_currency_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="currency_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_currency_member_code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="t_currency_settlement_agent" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="currency_settlement_agent"/>
+		<property name="com.jaspersoft.studio.field.label" value="t_currency_settlement_agent"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member_temp"/>
+	</field>
+	<field name="d_member_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_member_status"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_member_status"/>
+	</field>
+	<field name="d_activation_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_activation_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_activation_date"/>
+	</field>
+	<field name="d_swift_member" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_swift_member"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_swift_member"/>
+	</field>
+	<field name="d_swift_bic" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_swift_bic"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_swift_bic"/>
+	</field>
+	<field name="d_location_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_location_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_location_code"/>
+	</field>
+	<field name="d_fi_group" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_fi_group"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_fi_group"/>
+	</field>
+	<field name="d_fi_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_fi_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_fi_code"/>
+	</field>
+	<field name="d_sector_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_sector_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_sector_id"/>
+	</field>
+	<field name="d_currency_code_subscription" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_currency_code_subscription"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_currency_code_subscription"/>
+	</field>
+	<field name="d_tax_rate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_tax_rate"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_tax_rate"/>
+	</field>
+	<field name="d_fee_profile_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_fee_profile_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_fee_profile_id"/>
+	</field>
+	<field name="d_mcb_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_mcb_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_mcb_id"/>
+	</field>
+	<field name="d_intrday_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_intrday_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_intrday_mcb_requirement"/>
+	</field>
+	<field name="d_minimum_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_minimum_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_minimum_mcb_requirement"/>
+	</field>
+	<field name="d_maximum_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_maximum_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_maximum_mcb_requirement"/>
+	</field>
+	<field name="d_average_mcb_requirement" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_average_mcb_requirement"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_average_mcb_requirement"/>
+	</field>
+	<field name="d_uen" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_uen"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_uen"/>
+	</field>
+	<field name="d_lei" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_lei"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_lei"/>
+	</field>
+	<field name="d_exempted_from_billing" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="d_exempted_from_billing"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_exempted_from_billing"/>
+	</field>
+	<field name="d_exempted_from_system_limit" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="d_exempted_from_system_limit"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_exempted_from_system_limit"/>
+	</field>
+	<field name="d_currency_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_currency_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_currency_code"/>
+	</field>
+	<field name="d_currency_member_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_currency_member_code"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_currency_member_code"/>
+	</field>
+	<field name="d_currency_settlement_agent" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="d_currency_settlement_agent"/>
+		<property name="com.jaspersoft.studio.field.label" value="d_currency_settlement_agent"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="33">
+			<staticText>
+				<reportElement x="150" y="0" width="210" height="30" uuid="592acdcc-aa06-4ddd-ad1b-f961fc37eb44"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[MONETARY AUTHORITY OF SINGAPORE]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="410" y="0" width="100" height="30" uuid="6ebf6eb5-3423-451e-8084-3838a19a7342"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="0" width="100" height="20" uuid="0b72cd41-caf4-4f6f-a29c-3faf1a1755d2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[SCRIPS RTGS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="20" width="300" height="20" uuid="8a9021bc-5f75-404e-9547-4aedb7b9d671"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[	DATA MIGRATION MEMBER DETAIL REPORT FOR ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="360" y="20" width="100" height="20" uuid="09aebfb6-5cc4-4443-a04b-1a12aa8568ef"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="f92dbe45-d109-4bc6-ab99-595b2b281835"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[DETAILS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="0" width="70" height="30" uuid="0586677d-aa18-4106-acc2-29dc906205ef"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Values]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="0" width="80" height="30" uuid="68f5a751-0b2c-4c04-82df-c17a3dcc9ef7"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Original Value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="0" width="70" height="30" uuid="c8727123-bb8f-4726-9b10-bdb669b9b3da"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Source]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="0" width="65" height="30" uuid="b3f7e327-05f0-4fcd-bd80-ed6c7b936650"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="120" height="19" uuid="dfb89431-0abf-44e3-b468-29feb7b7b13b"/>
+				<text><![CDATA[Memebr Table -SCRIPS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="180" height="20" uuid="b319ec9f-02b4-46fa-a655-2ab465d4a1cb"/>
+				<text><![CDATA[Total Members Migrated to SCRIPS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="40" width="100" height="19" uuid="1c7d1981-5ea4-43d3-9b42-aa5b8c2552f0"/>
+				<textFieldExpression><![CDATA[$F{countVal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="560" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" uuid="0db0ffc3-2b1d-45a9-8d39-accc9e9914c9"/>
+				<text><![CDATA[Member Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="17" uuid="5aa71cce-b212-4bd7-96c8-2422ad539829"/>
+				<text><![CDATA[Member Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="10" width="100" height="20" uuid="39f09372-5838-46b1-9b35-ed59f60558ce"/>
+				<textFieldExpression><![CDATA[$F{t_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="30" width="100" height="17" uuid="ab3be182-c0df-4604-9d4f-00381322181a"/>
+				<textFieldExpression><![CDATA[$F{t_member_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="30" width="100" height="17" uuid="28564f45-bc8f-4826-a971-7fa5b182c52c"/>
+				<textFieldExpression><![CDATA[$F{d_member_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="52" width="100" height="20" uuid="584816c5-825b-4b4a-817b-7ec72bdaaf7f"/>
+				<text><![CDATA[Member Short Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="72" width="100" height="17" uuid="6bb6fb06-d28d-4523-88a3-2bfded4a9110"/>
+				<text><![CDATA[Member Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="100" height="20" uuid="778860fe-4118-4f66-a3cd-4047aa0c5b40"/>
+				<text><![CDATA[Member Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="100" height="17" uuid="be48455e-5ea4-46b4-86ba-f9ad6f36628c"/>
+				<text><![CDATA[Activate Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="130" width="100" height="20" uuid="37007f16-9120-45e4-8e62-c24f96d8ebcd"/>
+				<text><![CDATA[Swift Member]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="230" width="100" height="17" uuid="41208dd4-121b-41c5-8caa-09d1842a2bb3"/>
+				<text><![CDATA[Sector ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="210" width="100" height="20" uuid="3f06dbb0-99bb-4fc9-aa45-4fb450997c76"/>
+				<text><![CDATA[FI Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="150" width="100" height="17" uuid="c2613a96-ed7c-4409-b53d-3e3318c5b8cd"/>
+				<text><![CDATA[Swift BIC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="172" width="100" height="20" uuid="27728c2e-7c14-4d38-bcb2-02eafdc97787"/>
+				<text><![CDATA[Location Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="192" width="100" height="17" uuid="44a62269-dbc8-4601-8c13-317b99676ac1"/>
+				<text><![CDATA[FI Group]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="369" width="100" height="17" uuid="86a28673-21db-429a-b563-3d8afcfe6104"/>
+				<text><![CDATA[uen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="310" width="130" height="20" uuid="474adcff-021c-4259-a487-62279fc41577"/>
+				<text><![CDATA[minimum_mcb_requirement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="292" width="100" height="17" uuid="dda4319b-cdfb-4d30-9594-e9508fac4d03"/>
+				<text><![CDATA[MCB id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="352" width="130" height="20" uuid="f7b55cda-9a90-4efb-adb6-d8ee2fab0d26"/>
+				<text><![CDATA[average_mcb_requirement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="332" width="130" height="18" uuid="9300d44e-6c84-4478-bfd9-bcc403a2fbdc"/>
+				<text><![CDATA[maximum_mcb_requirement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="249" width="130" height="17" uuid="a7d2bf99-1b3c-431c-91bd-8ae2ce4a8eae"/>
+				<text><![CDATA[Currency Code Subscription]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="387" width="100" height="20" uuid="4b01c760-a68f-4e05-9d88-f714d672d1f0"/>
+				<text><![CDATA[lei]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="271" width="100" height="20" uuid="e0c7ff99-93f0-4829-a62c-6ff6f5a9d0d6"/>
+				<text><![CDATA[Tax Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="443" width="120" height="17" uuid="9aa7ff95-9d3c-4100-a4cc-810105fba347"/>
+				<text><![CDATA[exempted_from_billing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="488" width="100" height="17" uuid="23305234-b679-40f7-8783-5fedfbbac225"/>
+				<text><![CDATA[currency_settlement_agent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="425" width="100" height="20" uuid="d0a86502-7459-4f5f-96aa-2bbf9a220d6e"/>
+				<text><![CDATA[currency_member_code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="407" width="100" height="17" uuid="29799503-6a4d-4dcb-83f0-7088d5b43490"/>
+				<text><![CDATA[currency_code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="466" width="120" height="20" uuid="86f8b20a-45dc-4cc6-b704-e2fcfb06cd92"/>
+				<text><![CDATA[exempted_from_system_limit]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="72" width="100" height="17" uuid="d4b50307-2030-4ea3-99c5-53bc815861a4"/>
+				<textFieldExpression><![CDATA[$F{d_member_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="52" width="130" height="20" uuid="270580d4-20e7-4200-b5cd-f82207f714bf"/>
+				<textFieldExpression><![CDATA[$F{t_member_short_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="52" width="120" height="20" uuid="05777b25-e3cb-4089-ac64-95afd25acb32"/>
+				<textFieldExpression><![CDATA[$F{d_member_short_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="72" width="100" height="17" uuid="8576a8a7-b7b8-4e47-8549-3fdc2d490461"/>
+				<textFieldExpression><![CDATA[$F{t_member_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="152" width="100" height="17" uuid="5de75999-d66f-4e78-8d09-12b0e8157950"/>
+				<textFieldExpression><![CDATA[$F{d_swift_bic}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="110" width="100" height="17" uuid="2f987487-47ba-49fb-931f-0aa42d58502f"/>
+				<textFieldExpression><![CDATA[$F{d_activation_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="90" width="100" height="20" uuid="ca23e5f1-fced-4c3d-ab50-df3328836e69"/>
+				<textFieldExpression><![CDATA[$F{t_member_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="90" width="100" height="20" uuid="84b463f4-576f-410b-8592-cd002030573f"/>
+				<textFieldExpression><![CDATA[$F{d_member_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="152" width="100" height="17" uuid="0439ea66-9fbe-4710-859d-a2b6b79f59d2"/>
+				<textFieldExpression><![CDATA[$F{t_swift_bic}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="110" width="100" height="17" uuid="6511b047-2ee6-4893-a464-49526b6b16dc"/>
+				<textFieldExpression><![CDATA[$F{t_activation_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="132" width="100" height="20" uuid="d0019100-74aa-4078-a803-337028714554"/>
+				<textFieldExpression><![CDATA[$F{d_swift_member}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="132" width="100" height="20" uuid="b7e775f5-42cb-423a-b6c1-fca8ecd46c6d"/>
+				<textFieldExpression><![CDATA[$F{t_swift_member}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="232" width="100" height="17" uuid="7d557230-9e94-40f3-b4a2-a1cb6663a81a"/>
+				<textFieldExpression><![CDATA[$F{d_sector_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="170" width="100" height="20" uuid="8d8c0d10-8eee-40bf-aec7-90c6795e675d"/>
+				<textFieldExpression><![CDATA[$F{t_location_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="291" width="100" height="17" uuid="eb7a65ce-f577-4689-8880-3a75e5fce3c0"/>
+				<textFieldExpression><![CDATA[$F{t_mcb_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="232" width="100" height="17" uuid="ad8c367c-4e43-4908-898b-c091f202b811"/>
+				<textFieldExpression><![CDATA[$F{t_sector_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="291" width="100" height="17" uuid="8c3cc599-841b-4823-9f5e-33c9808c29c8"/>
+				<textFieldExpression><![CDATA[$F{d_mcb_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="271" width="100" height="20" uuid="8938d1d5-aca3-4c45-8224-ddee541e8873"/>
+				<textFieldExpression><![CDATA[$F{d_tax_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="212" width="100" height="20" uuid="09d51ace-551b-4309-9ba0-b9289a829207"/>
+				<textFieldExpression><![CDATA[$F{t_fi_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="249" width="130" height="17" uuid="075e8be4-20fa-40e4-9739-b89735f25422"/>
+				<textFieldExpression><![CDATA[$F{t_currency_code_subscription}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="190" width="100" height="17" uuid="a2c036ca-3762-41fe-b5d5-2720cd61823b"/>
+				<textFieldExpression><![CDATA[$F{d_fi_group}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="170" width="100" height="20" uuid="af8bc248-a24e-4926-8513-e6eb80f46642"/>
+				<textFieldExpression><![CDATA[$F{d_location_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="271" width="100" height="20" uuid="ce3be9fe-e297-4650-afa2-a6acb550f7de"/>
+				<textFieldExpression><![CDATA[$F{t_tax_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="249" width="100" height="17" uuid="a40b0fe2-9992-4bcc-8455-0c604340dd35"/>
+				<textFieldExpression><![CDATA[$F{d_currency_code_subscription}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="190" width="100" height="17" uuid="9ab89754-569a-4ee0-89e1-30ede7f95902"/>
+				<textFieldExpression><![CDATA[$F{t_fi_group}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="212" width="100" height="20" uuid="d5d4c13b-80e3-440d-8389-5ec972c9b9bb"/>
+				<textFieldExpression><![CDATA[$F{d_fi_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="412" width="100" height="17" uuid="5e84ae6e-5844-451e-8e56-c4accf4e44ae"/>
+				<textFieldExpression><![CDATA[$F{t_currency_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="348" width="100" height="20" uuid="97d49274-cd29-4299-b652-5e75af068f45"/>
+				<textFieldExpression><![CDATA[$F{d_average_mcb_requirement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="410" width="100" height="17" uuid="ccfdaca5-9da1-41d8-88ad-279b118fa5f3"/>
+				<textFieldExpression><![CDATA[$F{d_currency_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="390" width="100" height="20" uuid="578056c7-da55-4ade-84c4-f7964263585f"/>
+				<textFieldExpression><![CDATA[$F{d_lei}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="332" width="100" height="20" uuid="3b668924-20ff-4c9f-8a17-5ec420763d4e"/>
+				<textFieldExpression><![CDATA[$F{t_maximum_mcb_requirement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="350" width="100" height="20" uuid="2ca7ffc2-1311-40c0-b429-776d65624656"/>
+				<textFieldExpression><![CDATA[$F{t_average_mcb_requirement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="370" width="100" height="17" uuid="753907d7-5089-4785-9c71-7a3860712cf6"/>
+				<textFieldExpression><![CDATA[$F{t_uen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="308" width="100" height="17" uuid="96daaf9a-d2f2-4424-9ce3-690160254835"/>
+				<textFieldExpression><![CDATA[$F{d_minimum_mcb_requirement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="392" width="100" height="20" uuid="0e25268b-8aed-49a6-8ed7-8ee069deb00e"/>
+				<textFieldExpression><![CDATA[$F{t_lei}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="368" width="100" height="17" uuid="2bd796ca-3d2a-404c-b414-a0c5c0dd9f75"/>
+				<textFieldExpression><![CDATA[$F{d_uen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="310" width="100" height="17" uuid="9853283f-9ce7-470a-be4d-7585e81e2b48"/>
+				<textFieldExpression><![CDATA[$F{t_minimum_mcb_requirement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="330" width="100" height="20" uuid="b14ff7e0-5a96-42c7-98cb-07daf713c8b6"/>
+				<textFieldExpression><![CDATA[$F{d_maximum_mcb_requirement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="427" width="100" height="17" uuid="7f54a0ae-dfe1-49d6-be30-9fa1bbbf7f86"/>
+				<textFieldExpression><![CDATA[$F{d_currency_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="449" width="100" height="20" uuid="b79dde59-76a3-456b-bf98-8af39dafad22"/>
+				<textFieldExpression><![CDATA[$F{d_exempted_from_billing}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="429" width="100" height="17" uuid="7d939146-8992-4289-aa39-17c7e626b359"/>
+				<textFieldExpression><![CDATA[$F{t_currency_member_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="451" width="100" height="20" uuid="4387318d-16b4-4543-9aa2-a9ff6a1d9142"/>
+				<textFieldExpression><![CDATA[$F{t_exempted_from_billing}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="469" width="100" height="17" uuid="b1740333-025d-4012-8568-a3de34b71997"/>
+				<textFieldExpression><![CDATA[$F{d_exempted_from_system_limit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="471" width="100" height="17" uuid="ca00e05b-4339-46cc-910e-74fed9a8bacf"/>
+				<textFieldExpression><![CDATA[$F{t_exempted_from_system_limit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="489" width="100" height="17" uuid="ba02b959-d732-40af-8bf6-eb8b8cdd9a4c"/>
+				<textFieldExpression><![CDATA[$F{d_currency_settlement_agent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="490" width="100" height="17" uuid="472716fd-05d1-41b6-aeec-a0a3684f8784"/>
+				<textFieldExpression><![CDATA[$F{t_currency_settlement_agent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="10" width="100" height="20" uuid="0b524503-6ca9-4071-a090-9d5a8f76baa2"/>
+				<textFieldExpression><![CDATA[$F{d_member_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
